@@ -1,0 +1,109 @@
+{
+  "name": "Polystate Design System",
+  "version": "1.0.0",
+  "colors": {
+    "primary-blue": "#0E36A5",
+    "dark-blue": "#030B21",
+    "light-blue": "#CADDFF",
+    "accent-green": "#D8F2DC",
+    "neutral-cream": "#EAEAEA",
+    "neutral-grey": "#78788C",
+    "neutral-dark-gray": "#2E364D",
+    "button-hover": "#0E41CE"
+  },
+  "typography": {
+    "font-family": "General Sans",
+    "line-height": 1.4,
+    "weights": {
+      "regular": 400,
+      "medium": 500
+    },
+    "scale": {
+      "header-1": {
+        "weight": 400,
+        "sizes": [128, 96, 64]
+      },
+      "header-2": {
+        "weight": 500,
+        "sizes": [128, 96, 64]
+      },
+      "body": {
+        "weight": 400,
+        "sizes": [64, 48, 40, 32, 24]
+      }
+    },
+    "fonts": {
+      "regular": "/assets/GeneralSans-Regular.woff2",
+      "medium": "/assets/GeneralSans-Medium.woff2"
+    }
+  },
+  "components": {
+    "button": {
+      "background": "#0E36A5",
+      "color": "#FFFFFF",
+      "font-size": 14,
+      "font-weight": 400,
+      "border-radius": 24,
+      "padding": "16px 48px",
+      "hover-background": "#0E41CE"
+    },
+    "card": {
+      "background": "#FFFFFF",
+      "border": "1px solid #E5E5E5",
+      "border-radius": 12,
+      "box-shadow": "0 8px 32px rgba(3,11,33,0.06)",
+      "padding": "28px 24px"
+    }
+  },
+  "assets": {
+    "logo": "/assets/polystate-logo.svg",
+    "globe": "/assets/globe.png",
+    "flags": {
+      "paraguay": "/assets/flags/py.png",
+      "uruguay": "/assets/flags/uy.png",
+      "panama": "/assets/flags/pa.png",
+      "portugal": "/assets/flags/pt.png",
+      "honduras": "/assets/flags/hn.png",
+      "mexico": "/assets/flags/mx.png"
+    },
+    "photos": {
+      "paraguay": "/assets/photos/paraguay.png",
+      "uruguay": "/assets/photos/uruguay.png",
+      "panama": "/assets/photos/panama.png",
+      "mexico": "/assets/photos/mexico.png",
+      "portugal": "/assets/photos/portugal.png"
+    }
+  },
+  "countries": [
+    {
+      "name": "Paraguay",
+      "code": "py",
+      "highlights": ["0% tax on foreign income", "Low presence requirements", "Fast citizenship path (3 years)"]
+    },
+    {
+      "name": "Uruguay",
+      "code": "uy",
+      "highlights": ["0% foreign income tax", "Safe & developed country", "Ocean access"]
+    },
+    {
+      "name": "Panama",
+      "code": "pa",
+      "highlights": ["Territorial tax (0% foreign income)", "Corporate setup", "Large expat community, Non-CRS"]
+    },
+    {
+      "name": "Mexico",
+      "code": "mx",
+      "highlights": ["Digital nomad hub", "Low cost of living", "Large expat community"]
+    },
+    {
+      "name": "Portugal",
+      "code": "pt",
+      "highlights": ["Bitcoin golden visa", "EU passport after 5 years", "Minimal residency needed"]
+    },
+    {
+      "name": "Prospera",
+      "code": "hn",
+      "highlights": ["$5,000 lump sum tax", "Most free jurisdiction", "Caribbean location"]
+    }
+  ]
+}
