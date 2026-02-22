@@ -64,14 +64,35 @@
       "panama": "/assets/flags/pa.png",
       "portugal": "/assets/flags/pt.png",
       "honduras": "/assets/flags/hn.png",
-      "mexico": "/assets/flags/mx.png"
+      "mexico": "/assets/flags/mx.png",
+      "brazil": "/assets/flags/br.png",
+      "cambodia": "/assets/flags/kh.png",
+      "malta": "/assets/flags/mt.png",
+      "saint-lucia": "/assets/flags/lc.png",
+      "argentina": "/assets/flags/ar.png"
     },
     "photos": {
       "paraguay": "/assets/photos/paraguay.png",
       "uruguay": "/assets/photos/uruguay.png",
       "panama": "/assets/photos/panama.png",
       "mexico": "/assets/photos/mexico.png",
-      "portugal": "/assets/photos/portugal.png"
+      "portugal": "/assets/photos/portugal.png",
+      "argentina": "/assets/photos/argentina.png"
+    },
+    "partners": {
+      "offshore-citizen": "/assets/partners/offshore-citizen.png",
+      "wealthy-expat": "/assets/partners/wealthy-expat.png"
+    },
+    "icons": {
+      "frame": "/assets/icons/frame.svg",
+      "group": "/assets/icons/group.svg",
+      "world-vector": "/assets/icons/world-vector.svg"
+    },
+    "screenshots": {
+      "desktop-landing": "/assets/screenshots/desktop-landing.png",
+      "mobile-landing": "/assets/screenshots/mobile-landing.png",
+      "live-feed-section": "/assets/screenshots/live-feed-section.png",
+      "components": "/assets/screenshots/components.png"
     }
   },
   "countries": [

@@ -77,6 +77,20 @@
       <div style="text-align:center"><img src="/assets/flags/mx.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Mexico</div></div>
     </div>
 
+    <h2>Partners</h2>
+    <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+      <div class="asset-card" style="width:200px"><img src="/assets/partners/offshore-citizen.png" alt="Offshore Citizen" style="height:80px;object-fit:contain;padding:16px;background:white"><div class="info"><div class="name">Offshore Citizen</div><a href="/assets/partners/offshore-citizen.png">/assets/partners/offshore-citizen.png</a></div></div>
+      <div class="asset-card" style="width:200px"><img src="/assets/partners/wealthy-expat.png" alt="Wealthy Expat" style="height:80px;object-fit:contain;padding:16px;background:white"><div class="info"><div class="name">Wealthy Expat</div><a href="/assets/partners/wealthy-expat.png">/assets/partners/wealthy-expat.png</a></div></div>
+    </div>
+
+    <h2>Figma Screenshots (Reference)</h2>
+    <div class="assets-grid">
+      <div class="asset-card"><img src="/assets/screenshots/desktop-landing.png" alt="Desktop Landing"><div class="info"><div class="name">Desktop Landing (1440px)</div><a href="/assets/screenshots/desktop-landing.png">desktop-landing.png</a></div></div>
+      <div class="asset-card"><img src="/assets/screenshots/mobile-landing.png" alt="Mobile Landing"><div class="info"><div class="name">Mobile Landing (375px)</div><a href="/assets/screenshots/mobile-landing.png">mobile-landing.png</a></div></div>
+      <div class="asset-card"><img src="/assets/screenshots/live-feed-section.png" alt="Live Feed Section"><div class="info"><div class="name">Live Feed Section</div><a href="/assets/screenshots/live-feed-section.png">live-feed-section.png</a></div></div>
+      <div class="asset-card"><img src="/assets/screenshots/components.png" alt="Components"><div class="info"><div class="name">Component Library</div><a href="/assets/screenshots/components.png">components.png</a></div></div>
+    </div>
+
     <h2>Other Assets</h2>
     <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
       <div style="text-align:center"><img src="/assets/polystate-logo.svg" style="height:40px"><div style="font-size:13px;margin-top:4px"><a href="/assets/polystate-logo.svg" style="color:#0E36A5">polystate-logo.svg</a></div></div>
@@ -85,7 +99,11 @@
       <div style="text-align:center"><div style="font-size:13px"><a href="/assets/GeneralSans-Medium.woff2" style="color:#0E36A5">GeneralSans-Medium.woff2</a></div></div>
     </div>
 
-    <p style="margin-top:60px;font-size:13px;color:#78788C">&copy; Polystate. <a href="https://github.com/Spider333/polystate-design" style="color:#0E36A5">GitHub repo</a></p>
+    <h2>API</h2>
+    <p style="font-size:15px;margin-bottom:8px">Fetch design tokens programmatically:</p>
+    <code style="display:block;padding:12px;background:rgba(14,54,165,0.06);border-radius:8px;font-size:14px;line-height:1.6">fetch("https://polystate-design.vercel.app/design-system.json")<br>&nbsp;&nbsp;.then(r => r.json())<br>&nbsp;&nbsp;.then(tokens => console.log(tokens.colors))</code>
+
+    <p style="margin-top:60px;font-size:13px;color:#78788C">&copy; Polystate. <a href="https://github.com/Spider333/polystate-design" style="color:#0E36A5">GitHub repo</a> · <a href="/design-system.json" style="color:#0E36A5">design-system.json</a></p>
   </div>
 </body>
 </html>
