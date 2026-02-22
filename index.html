@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polystate Design System</title>
+  <style>
+    @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Regular.woff2') format('woff2'); font-weight: 400; }
+    @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Medium.woff2') format('woff2'); font-weight: 500; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'General Sans', sans-serif; background: #EAEAEA; color: #030B21; line-height: 1.4; }
+    .container { max-width: 960px; margin: 0 auto; padding: 60px 32px; }
+    .logo { height: 48px; margin-bottom: 16px; }
+    h1 { font-size: 40px; font-weight: 500; margin-bottom: 8px; }
+    .subtitle { font-size: 20px; color: #78788C; margin-bottom: 48px; }
+    h2 { font-size: 24px; font-weight: 500; margin: 40px 0 16px; padding-top: 32px; border-top: 1px solid #ddd; }
+    .colors { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+    .swatch { width: 120px; }
+    .swatch-box { width: 120px; height: 64px; border-radius: 8px; margin-bottom: 6px; border: 1px solid rgba(0,0,0,0.08); }
+    .swatch-label { font-size: 13px; color: #78788C; }
+    .swatch-hex { font-size: 14px; font-weight: 500; }
+    .type-row { margin-bottom: 12px; }
+    .type-label { font-size: 13px; color: #78788C; margin-bottom: 2px; }
+    .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .asset-card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #E5E5E5; }
+    .asset-card img { width: 100%; height: 140px; object-fit: cover; }
+    .asset-card .info { padding: 12px; }
+    .asset-card .info a { font-size: 13px; color: #0E36A5; text-decoration: none; word-break: break-all; }
+    .asset-card .info .name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .btn { display: inline-block; background: #0E36A5; color: white; font-size: 14px; font-family: 'General Sans', sans-serif; font-weight: 400; padding: 16px 48px; border-radius: 24px; text-decoration: none; margin-top: 8px; }
+    code { background: rgba(14,54,165,0.08); padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+    .json-link { display: inline-block; margin-top: 8px; font-size: 14px; color: #0E36A5; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="/assets/polystate-logo.svg" alt="Polystate" class="logo">
+    <h1>Design System</h1>
+    <p class="subtitle">Assets, tokens, and brand kit for Polystate. <a href="/design-system.json" class="json-link">design-system.json</a></p>
+
+    <h2>Colors</h2>
+    <div class="colors">
+      <div class="swatch"><div class="swatch-box" style="background:#0E36A5"></div><div class="swatch-hex">#0E36A5</div><div class="swatch-label">Primary Blue</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#030B21"></div><div class="swatch-hex">#030B21</div><div class="swatch-label">Dark Blue</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#CADDFF"></div><div class="swatch-hex">#CADDFF</div><div class="swatch-label">Light Blue</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#D8F2DC"></div><div class="swatch-hex">#D8F2DC</div><div class="swatch-label">Accent Green</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#EAEAEA"></div><div class="swatch-hex">#EAEAEA</div><div class="swatch-label">Neutral Cream</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#78788C"></div><div class="swatch-hex">#78788C</div><div class="swatch-label">Neutral Grey</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#2E364D"></div><div class="swatch-hex">#2E364D</div><div class="swatch-label">Dark Gray</div></div>
+    </div>
+
+    <h2>Typography</h2>
+    <div class="type-row"><div class="type-label">Header 1 — Regular 400</div><div style="font-size:48px;font-weight:400">Build a life that moves with you</div></div>
+    <div class="type-row"><div class="type-label">Header 2 — Medium 500</div><div style="font-size:40px;font-weight:500">Your sovereignty, engineered.</div></div>
+    <div class="type-row"><div class="type-label">Body — Regular 400, 24px</div><div style="font-size:24px;font-weight:400;color:#78788C">Residency, banking, company setup — everything you need to go borderless.</div></div>
+
+    <h2>Button</h2>
+    <a href="#" class="btn">Become a Global Citizen</a>
+    <p style="margin-top:12px;font-size:13px;color:#78788C">14px General Sans Regular, pill-shaped (24px radius), Primary Blue bg</p>
+
+    <h2>Country Photos</h2>
+    <div class="assets-grid">
+      <div class="asset-card"><img src="/assets/photos/paraguay.png" alt="Paraguay"><div class="info"><div class="name">Paraguay</div><a href="/assets/photos/paraguay.png">/assets/photos/paraguay.png</a></div></div>
+      <div class="asset-card"><img src="/assets/photos/uruguay.png" alt="Uruguay"><div class="info"><div class="name">Uruguay</div><a href="/assets/photos/uruguay.png">/assets/photos/uruguay.png</a></div></div>
+      <div class="asset-card"><img src="/assets/photos/panama.png" alt="Panama"><div class="info"><div class="name">Panama</div><a href="/assets/photos/panama.png">/assets/photos/panama.png</a></div></div>
+      <div class="asset-card"><img src="/assets/photos/mexico.png" alt="Mexico"><div class="info"><div class="name">Mexico</div><a href="/assets/photos/mexico.png">/assets/photos/mexico.png</a></div></div>
+      <div class="asset-card"><img src="/assets/photos/portugal.png" alt="Portugal"><div class="info"><div class="name">Portugal</div><a href="/assets/photos/portugal.png">/assets/photos/portugal.png</a></div></div>
+    </div>
+
+    <h2>Flags</h2>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:16px">
+      <div style="text-align:center"><img src="/assets/flags/py.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Paraguay</div></div>
+      <div style="text-align:center"><img src="/assets/flags/uy.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Uruguay</div></div>
+      <div style="text-align:center"><img src="/assets/flags/pa.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Panama</div></div>
+      <div style="text-align:center"><img src="/assets/flags/pt.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Portugal</div></div>
+      <div style="text-align:center"><img src="/assets/flags/hn.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Prospera</div></div>
+      <div style="text-align:center"><img src="/assets/flags/mx.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Mexico</div></div>
+    </div>
+
+    <h2>Other Assets</h2>
+    <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+      <div style="text-align:center"><img src="/assets/polystate-logo.svg" style="height:40px"><div style="font-size:13px;margin-top:4px"><a href="/assets/polystate-logo.svg" style="color:#0E36A5">polystate-logo.svg</a></div></div>
+      <div style="text-align:center"><img src="/assets/globe.png" style="height:80px;opacity:0.4"><div style="font-size:13px;margin-top:4px"><a href="/assets/globe.png" style="color:#0E36A5">globe.png</a></div></div>
+      <div style="text-align:center"><div style="font-size:13px"><a href="/assets/GeneralSans-Regular.woff2" style="color:#0E36A5">GeneralSans-Regular.woff2</a></div></div>
+      <div style="text-align:center"><div style="font-size:13px"><a href="/assets/GeneralSans-Medium.woff2" style="color:#0E36A5">GeneralSans-Medium.woff2</a></div></div>
+    </div>
+
+    <p style="margin-top:60px;font-size:13px;color:#78788C">&copy; Polystate. <a href="https://github.com/Spider333/polystate-design" style="color:#0E36A5">GitHub repo</a></p>
+  </div>
+</body>
+</html>
