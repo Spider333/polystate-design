@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polystate Component Library</title>
+  <style>
+    @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Regular.woff2') format('woff2'); font-weight: 400; }
+    @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Medium.woff2') format('woff2'); font-weight: 500; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'General Sans', sans-serif; background: #fff; color: #030B21; line-height: 1.4; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px 80px; }
+    .back { display: inline-block; font-size: 14px; color: #0E36A5; text-decoration: none; margin-bottom: 32px; }
+    .back:hover { text-decoration: underline; }
+    h1 { font-size: 36px; font-weight: 500; margin-bottom: 8px; }
+    .subtitle { font-size: 18px; color: #78788C; margin-bottom: 48px; }
+    h2 { font-size: 22px; font-weight: 500; margin: 48px 0 20px; padding-top: 32px; border-top: 1px solid #E5E5E5; }
+    .row { display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+    .label { font-size: 13px; color: #78788C; margin-top: 8px; }
+    .component-label { font-size: 13px; color: #78788C; margin-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Buttons */
+    .btn { display: inline-block; font-family: 'General Sans', sans-serif; font-size: 14px; font-weight: 400; color: white; padding: 16px 48px; border-radius: 24px; text-decoration: none; border: none; cursor: pointer; }
+    .btn-default { background: #0E36A5; }
+    .btn-hover { background: #0E41CE; }
+
+    /* Icons */
+    .icon-grid { display: flex; gap: 32px; flex-wrap: wrap; }
+    .icon-item { text-align: center; }
+    .icon-box { width: 32px; height: 32px; background: #0E36A5; border-radius: 4px; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; }
+    .icon-box svg { width: 18px; height: 18px; fill: white; }
+
+    /* Country Cards */
+    .country-card { width: 275px; height: 327px; border-radius: 4px; border: 1px solid #E5E5E5; overflow: hidden; position: relative; flex-shrink: 0; }
+    .country-card img.photo { width: 100%; height: 100%; object-fit: cover; }
+    .country-card .overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.5) 40%); backdrop-filter: blur(7.5px); border: 1px solid rgba(255,255,255,0.7); border-radius: 4px 4px 0 0; }
+    .country-card .overlay .top { display: flex; align-items: center; justify-content: space-between; }
+    .country-card .overlay .country-info { display: flex; align-items: center; gap: 8px; }
+    .country-card .overlay .flag { height: 16px; border-radius: 2px; }
+    .country-card .overlay .name { font-size: 18px; color: white; }
+    .country-card .overlay .add-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; cursor: pointer; background: none; }
+    .country-card .overlay .add-btn svg { width: 14px; height: 14px; stroke: white; }
+    .country-card .overlay .details { margin-top: 16px; font-size: 14px; color: white; line-height: 1.6; display: none; }
+    .country-card.hover .overlay .details { display: block; }
+    .country-card.hover .overlay .add-btn { display: none; }
+
+    /* Feature Cards */
+    .feature-card { width: 376px; height: 240px; padding: 48px 28px; display: flex; flex-direction: column; gap: 16px; justify-content: center; border-radius: 0; position: relative; }
+    .feature-card.default { background: rgba(249,249,249,0.9); }
+    .feature-card.active { border: 1px solid #0E36A5; }
+    .feature-card .icon { width: 28px; height: 28px; background: #0E36A5; border-radius: 4px; }
+    .feature-card .title { font-size: 18px; font-weight: 500; }
+    .feature-card.default .title { color: #030B21; }
+    .feature-card.active .title { color: #0E36A5; }
+    .feature-card .desc { font-size: 18px; }
+    .feature-card.default .desc { color: #78788C; }
+    .feature-card.active .desc { color: #2E364D; }
+
+    /* FAQ */
+    .faq-item { width: 752px; max-width: 100%; padding: 24px 0; border-bottom: 1px solid #E5E5E5; }
+    .faq-question { display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 16px; }
+    .faq-question .q-text { font-size: 16px; font-weight: 500; flex: 1; }
+    .faq-question .toggle { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.2s; }
+    .faq-question .toggle svg { width: 16px; height: 16px; stroke: #030B21; }
+    .faq-answer { font-size: 16px; color: #78788C; margin-top: 24px; line-height: 1.4; display: none; }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .toggle { transform: rotate(45deg); }
+
+    /* Tabs */
+    .tab { width: 451px; max-width: 100%; padding: 24px 96px 24px 0; border-bottom: 1.5px solid; border-radius: 8px 8px 0 0; }
+    .tab.active { border-color: #0E36A5; }
+    .tab.inactive { border-color: #EAEAEA; }
+    .tab .tab-label { font-size: 16px; font-weight: 500; }
+    .tab.active .tab-label { color: #0E36A5; }
+    .tab.inactive .tab-label { color: #2E364D; }
+    .tab .tab-desc { font-size: 16px; color: #2E364D; margin-top: 16px; line-height: 1.4; }
+
+    /* Globe */
+    .globe-preview { width: 100%; max-width: 800px; height: 400px; background: #F9F9F9; border-radius: 12px; border: 1px solid #E5E5E5; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .globe-preview img { width: 100%; height: 100%; object-fit: contain; opacity: 0.15; }
+
+    /* Tokens */
+    .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+    .token { display: flex; align-items: center; gap: 8px; }
+    .token-swatch { width: 32px; height: 32px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); flex-shrink: 0; }
+    .token-info .hex { font-size: 14px; font-weight: 500; }
+    .token-info .name { font-size: 12px; color: #78788C; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/index.html" class="back">&larr; Back to Design System</a>
+    <h1>Component Library</h1>
+    <p class="subtitle">All reusable Polystate UI components extracted from Figma</p>
+
+    <!-- Buttons -->
+    <h2>Buttons</h2>
+    <div class="row">
+      <div>
+        <div class="component-label">Default</div>
+        <button class="btn btn-default">Become a Global Citizen</button>
+      </div>
+      <div>
+        <div class="component-label">Hover</div>
+        <button class="btn btn-hover">Become a Global Citizen</button>
+      </div>
+    </div>
+
+    <!-- Icons -->
+    <h2>Fusion Icons</h2>
+    <div class="icon-grid">
+      <div class="icon-item">
+        <div class="icon-box"><svg viewBox="0 0 18 18"><path d="M9 1C5.13 1 2 4.13 2 8s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7zm0 1v12M2 8h14M3.5 4c1.5 1.2 3.4 2 5.5 2s4-0.8 5.5-2M3.5 12c1.5-1.2 3.4-2 5.5-2s4 0.8 5.5 2" fill="none" stroke="white" stroke-width="1.2"/></svg></div>
+        <div class="label">Map</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="white" stroke-width="1.2"/><path d="M9 2v7h5" fill="none" stroke="white" stroke-width="1.2"/></svg></div>
+        <div class="label">Pie Chart</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg viewBox="0 0 18 18"><path d="M4 12l5-3 5 3V6L9 3 4 6z" fill="none" stroke="white" stroke-width="1.2"/><path d="M4 12v-6M14 12v-6M9 9v-6" fill="none" stroke="white" stroke-width="1.2"/></svg></div>
+        <div class="label">Block 3D</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg viewBox="0 0 18 18"><path d="M9 2L6 8h6L9 2zM4 10h10v2c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4v-2z" fill="none" stroke="white" stroke-width="1.2"/></svg></div>
+        <div class="label">Donate</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg viewBox="0 0 18 18"><circle cx="5" cy="9" r="2" fill="none" stroke="white" stroke-width="1.2"/><circle cx="13" cy="5" r="2" fill="none" stroke="white" stroke-width="1.2"/><circle cx="13" cy="13" r="2" fill="none" stroke="white" stroke-width="1.2"/><path d="M7 8l4-2M7 10l4 2" fill="none" stroke="white" stroke-width="1.2"/></svg></div>
+        <div class="label">Connection</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg viewBox="0 0 18 18"><path d="M9 2a7 7 0 0 1 7 7" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="label">Spinner</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon-box"><svg viewBox="0 0 18 18"><path d="M9 4v10M4 9h10" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="label">Add</div>
+      </div>
+    </div>
+
+    <!-- Country Cards -->
+    <h2>Country Cards</h2>
+    <div class="row">
+      <div>
+        <div class="component-label">Default</div>
+        <div class="country-card">
+          <img class="photo" src="/assets/photos/paraguay.png" alt="Paraguay">
+          <div class="overlay">
+            <div class="top">
+              <div class="country-info">
+                <img class="flag" src="/assets/flags/py.png" alt="PY">
+                <span class="name">Paraguay</span>
+              </div>
+              <button class="add-btn"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            </div>
+            <div class="details">
+              <p>Get your residency, including:</p>
+              <p>&#10023; Tax residency certificate</p>
+              <p>&#10023; KYC Address Package</p>
+              <p>&#10023; Paraguay RUC (Tax ID)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="component-label">Hover / Expanded</div>
+        <div class="country-card hover">
+          <img class="photo" src="/assets/photos/paraguay.png" alt="Paraguay">
+          <div class="overlay">
+            <div class="top">
+              <div class="country-info">
+                <img class="flag" src="/assets/flags/py.png" alt="PY">
+                <span class="name">Paraguay</span>
+              </div>
+              <button class="add-btn"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            </div>
+            <div class="details">
+              <p>Get your residency, including:</p>
+              <p>&#10023; Tax residency certificate</p>
+              <p>&#10023; KYC Address Package</p>
+              <p>&#10023; Paraguay RUC (Tax ID)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <h2>Feature Cards (Why Section)</h2>
+    <div class="row">
+      <div>
+        <div class="component-label">Default</div>
+        <div class="feature-card default">
+          <div class="icon"></div>
+          <div>
+            <div class="title">Increase your freedom</div>
+            <div class="desc">with more choices, optionality, and opportunities across borders</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="component-label">Active / Variant 2</div>
+        <div class="feature-card active">
+          <div class="icon"></div>
+          <div>
+            <div class="title">Increase your freedom</div>
+            <div class="desc">with more choices, optionality, and opportunities across borders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <h2>FAQ Component</h2>
+    <div>
+      <div class="component-label">Collapsed</div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span class="q-text">Do you manage the entire application process for residencies or visas?</span>
+          <span class="toggle"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+        </div>
+        <div class="faq-answer">Yes, we offer end-to-end support for your residency or visa application.</div>
+      </div>
+    </div>
+    <div style="margin-top: 24px;">
+      <div class="component-label">Expanded</div>
+      <div class="faq-item open">
+        <div class="faq-question">
+          <span class="q-text">Do you manage the entire application process for residencies or visas?</span>
+          <span class="toggle"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+        </div>
+        <div class="faq-answer">Yes, we offer end-to-end support for your residency or visa application.</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <h2>Tab Component</h2>
+    <div class="row" style="flex-direction: column; gap: 0;">
+      <div>
+        <div class="component-label">Active</div>
+        <div class="tab active">
+          <div class="tab-label">News</div>
+          <div class="tab-desc">Receive updates on changes to visa, tax policies and global mobility news</div>
+        </div>
+      </div>
+      <div style="margin-top: 16px;">
+        <div class="component-label">Inactive</div>
+        <div class="tab inactive">
+          <div class="tab-label">News</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Globe -->
+    <h2>Globe / Graticule Background</h2>
+    <div class="globe-preview">
+      <img src="/assets/icons/graticule-world.svg" alt="World map graticule">
+    </div>
+    <p class="label">Used as background in the "Why Polystate" section at ~15% opacity</p>
+
+    <!-- Design Tokens -->
+    <h2>Design Tokens</h2>
+    <div class="token-grid">
+      <div class="token"><div class="token-swatch" style="background:#0E36A5"></div><div class="token-info"><div class="hex">#0E36A5</div><div class="name">Primary Blue</div></div></div>
+      <div class="token"><div class="token-swatch" style="background:#0E41CE"></div><div class="token-info"><div class="hex">#0E41CE</div><div class="name">Hover Blue</div></div></div>
+      <div class="token"><div class="token-swatch" style="background:#030B21"></div><div class="token-info"><div class="hex">#030B21</div><div class="name">Dark</div></div></div>
+      <div class="token"><div class="token-swatch" style="background:#2E364D"></div><div class="token-info"><div class="hex">#2E364D</div><div class="name">Body Text</div></div></div>
+      <div class="token"><div class="token-swatch" style="background:#78788C"></div><div class="token-info"><div class="hex">#78788C</div><div class="name">Muted</div></div></div>
+      <div class="token"><div class="token-swatch" style="background:#F9F9F9"></div><div class="token-info"><div class="hex">#F9F9F9</div><div class="name">Background</div></div></div>
+      <div class="token"><div class="token-swatch" style="background:#EAEAEA"></div><div class="token-info"><div class="hex">#EAEAEA</div><div class="name">Neutral</div></div></div>
+      <div class="token"><div class="token-swatch" style="background:#E5E5E5"></div><div class="token-info"><div class="hex">#E5E5E5</div><div class="name">Border</div></div></div>
+      <div class="token"><div class="token-swatch" style="background:#D8F2DC"></div><div class="token-info"><div class="hex">#D8F2DC</div><div class="name">Green Accent</div></div></div>
+      <div class="token"><div class="token-swatch" style="background:#CADDFF"></div><div class="token-info"><div class="hex">#CADDFF</div><div class="name">Light Blue</div></div></div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+  </script>
+</body>
+</html>

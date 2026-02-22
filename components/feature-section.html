@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polystate Feature Section</title>
+  <style>
+    @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Regular.woff2') format('woff2'); font-weight: 400; }
+    @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Medium.woff2') format('woff2'); font-weight: 500; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'General Sans', sans-serif; background: #F9F9F9; color: #030B21; }
+    .back { display: inline-block; font-size: 14px; color: #0E36A5; text-decoration: none; margin: 24px 32px; }
+    .back:hover { text-decoration: underline; }
+
+    .section { max-width: 1296px; margin: 0 auto; padding: 48px 32px 80px; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #D8F2DC; border-radius: 13px; padding: 4px 8px; font-size: 14px; color: #424242; box-shadow: 0 1px 1px #A3F9B0; margin-bottom: 16px; }
+    .header { text-align: center; margin-bottom: 48px; }
+    .title { font-size: 32px; font-weight: 500; }
+    .title span { font-weight: 400; }
+
+    .content { display: flex; gap: 48px; align-items: flex-start; }
+    .tabs { width: 451px; flex-shrink: 0; }
+    .tab { padding: 24px 0; border-bottom: 1.5px solid #EAEAEA; border-radius: 8px 8px 0 0; cursor: pointer; transition: border-color 0.2s; }
+    .tab.active { border-color: #0E36A5; }
+    .tab-label { font-size: 16px; font-weight: 500; color: #2E364D; display: flex; align-items: center; gap: 10px; }
+    .tab.active .tab-label { color: #0E36A5; }
+    .tab-icon { width: 20px; height: 20px; border-radius: 3px; background: #E5E5E5; display: inline-flex; align-items: center; justify-content: center; }
+    .tab.active .tab-icon { background: #0E36A5; }
+    .tab-icon svg { width: 12px; height: 12px; }
+    .tab.active .tab-icon svg { stroke: white; }
+    .tab-desc { font-size: 16px; color: #2E364D; margin-top: 16px; line-height: 1.4; max-height: 0; overflow: hidden; transition: max-height 0.3s, margin 0.3s; }
+    .tab.active .tab-desc { max-height: 100px; }
+
+    .panel-area { flex: 1; min-height: 500px; position: relative; display: flex; align-items: center; justify-content: center; }
+    .panel { display: none; width: 100%; animation: fadeIn 0.3s; }
+    .panel.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* News panel */
+    .news-mockup { position: relative; width: 100%; max-width: 600px; margin: 0 auto; }
+    .news-mockup .app-img { width: 100%; border-radius: 12px; }
+    .news-pill { background: linear-gradient(90deg, white, rgba(255,255,255,0.8)); border: 1px solid #0E36A5; border-bottom-width: 1px; border-radius: 100px; padding: 12px 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); display: flex; gap: 16px; align-items: flex-start; margin-bottom: 12px; max-width: 380px; }
+    .news-pill img { width: 45px; height: 24px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
+    .news-pill .text { font-size: 13px; color: #2E364D; line-height: 1.35; }
+    .news-pill .meta { font-size: 11px; color: #78788C; margin-top: 2px; }
+
+    /* Citizenship panel */
+    .country-badge { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: white; border-radius: 12px; border: 1px solid #E5E5E5; margin-bottom: 12px; max-width: 360px; }
+    .country-badge img.flag { height: 20px; border-radius: 3px; }
+    .country-badge .name { font-size: 16px; font-weight: 500; }
+    .country-badge .type { font-size: 12px; color: #1a7a2e; background: #ddffe2; padding: 2px 8px; border-radius: 8px; margin-left: auto; }
+    .country-badge .detail { font-size: 13px; color: #78788C; }
+
+    /* Residency panel */
+    .res-card { width: 240px; height: 280px; border-radius: 4px; border: 1px solid #E5E5E5; overflow: hidden; position: relative; display: inline-block; margin-right: 16px; vertical-align: top; }
+    .res-card img.photo { width: 100%; height: 100%; object-fit: cover; }
+    .res-card .overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 40%); backdrop-filter: blur(7px); }
+    .res-card .overlay .info { display: flex; align-items: center; gap: 8px; }
+    .res-card .overlay .flag { height: 14px; border-radius: 2px; }
+    .res-card .overlay .name { font-size: 16px; color: white; }
+
+    /* Placeholder panels */
+    .placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 48px; text-align: center; color: #78788C; }
+    .placeholder .icon-large { width: 64px; height: 64px; background: #EAEAEA; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .placeholder .icon-large svg { width: 32px; height: 32px; stroke: #78788C; fill: none; }
+    .placeholder .items { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .placeholder .item { background: white; border: 1px solid #E5E5E5; border-radius: 8px; padding: 12px 20px; font-size: 14px; color: #2E364D; }
+
+    /* Norma AI panel */
+    .norma-panel { background: linear-gradient(135deg, #030B21, #0E36A5); border-radius: 16px; padding: 48px 32px; text-align: center; position: relative; overflow: hidden; }
+    .norma-panel .globe-bg { position: absolute; inset: 0; opacity: 0.1; display: flex; align-items: center; justify-content: center; }
+    .norma-panel .globe-bg img { width: 100%; height: 100%; object-fit: contain; }
+    .norma-panel .search-bar { position: relative; z-index: 1; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 24px; padding: 14px 24px; color: rgba(255,255,255,0.6); font-size: 15px; text-align: left; backdrop-filter: blur(4px); margin-bottom: 20px; }
+    .norma-panel .tags { position: relative; z-index: 1; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .norma-panel .tag { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 6px 14px; font-size: 13px; color: rgba(255,255,255,0.7); }
+  </style>
+</head>
+<body>
+  <a href="/index.html" class="back">&larr; Back to Design System</a>
+
+  <div class="section">
+    <div class="header">
+      <div class="badge">POWERFUL TOOLS INSIDE</div>
+      <div class="title">A live feed for <span>Global citizenship</span></div>
+    </div>
+
+    <div class="content">
+      <div class="tabs">
+        <div class="tab active" data-panel="news">
+          <div class="tab-label">
+            <span class="tab-icon"><svg viewBox="0 0 12 12" fill="none" stroke="#78788C" stroke-width="1.2"><rect x="1" y="2" width="10" height="8" rx="1"/><path d="M1 5h10"/></svg></span>
+            News
+          </div>
+          <div class="tab-desc">Receive updates on changes to visa, tax policies and global mobility news</div>
+        </div>
+        <div class="tab" data-panel="citizenship">
+          <div class="tab-label">
+            <span class="tab-icon"><svg viewBox="0 0 12 12" fill="none" stroke="#78788C" stroke-width="1.2"><circle cx="6" cy="6" r="4.5"/><path d="M6 1.5v9M1.5 6h9"/></svg></span>
+            Citizenship
+          </div>
+          <div class="tab-desc">Explore citizenship by investment programs across the globe</div>
+        </div>
+        <div class="tab" data-panel="residency">
+          <div class="tab-label">
+            <span class="tab-icon"><svg viewBox="0 0 12 12" fill="none" stroke="#78788C" stroke-width="1.2"><path d="M2 10V4l4-2.5L10 4v6H2z"/><rect x="4.5" y="6.5" width="3" height="3.5"/></svg></span>
+            Residency
+          </div>
+          <div class="tab-desc">Find the best residency programs matching your lifestyle and goals</div>
+        </div>
+        <div class="tab" data-panel="legal">
+          <div class="tab-label">
+            <span class="tab-icon"><svg viewBox="0 0 12 12" fill="none" stroke="#78788C" stroke-width="1.2"><rect x="2" y="1" width="8" height="10" rx="1"/><path d="M4 4h4M4 6h4M4 8h2"/></svg></span>
+            Legal
+          </div>
+          <div class="tab-desc">Access legal frameworks, tax treaties, and compliance information</div>
+        </div>
+        <div class="tab" data-panel="toolkit">
+          <div class="tab-label">
+            <span class="tab-icon"><svg viewBox="0 0 12 12" fill="none" stroke="#78788C" stroke-width="1.2"><rect x="1" y="3" width="10" height="7" rx="1.5"/><path d="M4 3V2a2 2 0 0 1 4 0v1"/></svg></span>
+            Toolkit
+          </div>
+          <div class="tab-desc">Banking integrations, document management, and financial tools</div>
+        </div>
+        <div class="tab" data-panel="norma">
+          <div class="tab-label">
+            <span class="tab-icon"><svg viewBox="0 0 12 12" fill="none" stroke="#78788C" stroke-width="1.2"><circle cx="5" cy="5" r="3.5"/><path d="M8 8l2.5 2.5"/></svg></span>
+            Norma AI
+          </div>
+          <div class="tab-desc">Your AI-powered assistant for global citizenship questions</div>
+        </div>
+      </div>
+
+      <div class="panel-area">
+        <!-- News -->
+        <div class="panel active" id="news">
+          <div class="news-mockup">
+            <div class="news-pill">
+              <img src="/assets/news/st-vincent.png" alt="St. Vincent">
+              <div>
+                <div class="text">New Opportunity: St. Vincent Launching Citizenship by Investment</div>
+                <div class="meta">Today</div>
+              </div>
+            </div>
+            <div class="news-pill">
+              <img src="/assets/news/singapore.png" alt="Singapore">
+              <div>
+                <div class="text">Banking in Singapore: In-Person Meeting Required or not?</div>
+                <div class="meta">Yesterday</div>
+              </div>
+            </div>
+            <div class="news-pill">
+              <img src="/assets/news/golden-visa.png" alt="Golden Visa">
+              <div>
+                <div class="text">The Easiest (and Cheapest) Golden Visa in Europe Right Now</div>
+                <div class="meta">5 days ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Citizenship -->
+        <div class="panel" id="citizenship">
+          <div>
+            <div class="country-badge">
+              <img class="flag" src="/assets/flags/kh.png" alt="Cambodia">
+              <div>
+                <div class="name">Cambodia</div>
+                <div class="detail">7 Years Naturalization</div>
+              </div>
+              <span class="type">Citizenship</span>
+            </div>
+            <div class="country-badge">
+              <img class="flag" src="/assets/flags/mt.png" alt="Malta">
+              <div>
+                <div class="name">Malta</div>
+                <div class="detail">Investment available</div>
+              </div>
+              <span class="type">Citizenship</span>
+            </div>
+            <div class="country-badge">
+              <img class="flag" src="/assets/flags/lc.png" alt="Saint Lucia">
+              <div>
+                <div class="name">Saint Lucia</div>
+                <div class="detail">Investment available</div>
+              </div>
+              <span class="type">Citizenship</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Residency -->
+        <div class="panel" id="residency">
+          <div>
+            <div class="res-card">
+              <img class="photo" src="/assets/photos/paraguay.png" alt="Paraguay">
+              <div class="overlay">
+                <div class="info">
+                  <img class="flag" src="/assets/flags/py.png" alt="PY">
+                  <span class="name">Paraguay</span>
+                </div>
+              </div>
+            </div>
+            <div class="res-card">
+              <img class="photo" src="/assets/photos/uruguay.png" alt="Uruguay">
+              <div class="overlay">
+                <div class="info">
+                  <img class="flag" src="/assets/flags/uy.png" alt="UY">
+                  <span class="name">Uruguay</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legal -->
+        <div class="panel" id="legal">
+          <div class="placeholder">
+            <div class="icon-large"><svg viewBox="0 0 32 32"><rect x="6" y="2" width="20" height="28" rx="2"/><path d="M10 10h12M10 14h12M10 18h8"/></svg></div>
+            <div class="items">
+              <div class="item">Tax Treaties &amp; Agreements</div>
+              <div class="item">Compliance Calendar</div>
+              <div class="item">Legal Frameworks by Country</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toolkit -->
+        <div class="panel" id="toolkit">
+          <div class="placeholder">
+            <div class="icon-large"><svg viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="18" rx="3"/><path d="M10 8V6a6 6 0 0 1 12 0v2"/></svg></div>
+            <div class="items">
+              <div class="item">Revolut Integration</div>
+              <div class="item">Wise Integration</div>
+              <div class="item">Document Management</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Norma AI -->
+        <div class="panel" id="norma">
+          <div class="norma-panel">
+            <div class="globe-bg"><img src="/assets/icons/graticule-world.svg" alt=""></div>
+            <div class="search-bar">Ask Norma AI anything...</div>
+            <div class="tags">
+              <span class="tag">Residency</span>
+              <span class="tag">Tax optimization</span>
+              <span class="tag">Banking</span>
+              <span class="tag">Citizenship</span>
+              <span class="tag">Company setup</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.panel');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.panel).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

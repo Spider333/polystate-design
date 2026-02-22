@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polystate Mobile Landing</title>
+  <style>
+    @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Regular.woff2') format('woff2'); font-weight: 400; }
+    @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Medium.woff2') format('woff2'); font-weight: 500; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'General Sans', sans-serif; background: #F9F9F9; color: #030B21; line-height: 1.4; max-width: 420px; margin: 0 auto; }
+    .back { display: inline-block; font-size: 13px; color: #0E36A5; text-decoration: none; padding: 12px 16px; }
+    .back:hover { text-decoration: underline; }
+
+    /* NAV */
+    .nav { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 420px; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: rgba(255,255,255,0.7); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.8); }
+    .nav img.logo { height: 20px; }
+    .nav .join { background: #0E36A5; color: white; padding: 8px 16px; border-radius: 20px; font-size: 13px; text-decoration: none; font-family: 'General Sans', sans-serif; }
+
+    /* HERO */
+    .hero { padding: 80px 20px 48px; text-align: center; position: relative; overflow: hidden; }
+    .hero .globe-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.06; }
+    .hero .globe-bg img { width: 200%; max-width: none; }
+    .hero h1 { font-size: 32px; font-weight: 400; position: relative; z-index: 1; line-height: 1.2; }
+    .hero .sub { font-size: 16px; color: #78788C; margin-top: 12px; position: relative; z-index: 1; }
+    .hero .cta { display: inline-block; margin-top: 24px; background: #0E36A5; color: white; font-family: 'General Sans', sans-serif; font-size: 14px; padding: 14px 40px; border-radius: 24px; text-decoration: none; position: relative; z-index: 1; }
+
+    /* RESIDENCY */
+    .residency { padding: 32px 16px; }
+    .tabs-row { display: flex; gap: 0; overflow-x: auto; margin-bottom: 20px; border-bottom: 1px solid #E5E5E5; }
+    .tabs-row::-webkit-scrollbar { display: none; }
+    .tab-btn { font-family: 'General Sans', sans-serif; font-size: 14px; font-weight: 500; color: #78788C; background: none; border: none; padding: 10px 16px; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+    .tab-btn.active { color: #0E36A5; border-bottom-color: #0E36A5; }
+    .res-heading { font-size: 24px; font-weight: 500; margin-bottom: 12px; }
+    .benefit-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .benefit-tag { font-size: 12px; color: #2E364D; display: flex; align-items: center; gap: 4px; }
+    .benefit-tag svg { width: 14px; height: 14px; }
+    .cards-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; }
+    .cards-scroll::-webkit-scrollbar { display: none; }
+    .m-card { width: 200px; height: 260px; border-radius: 4px; border: 1px solid #E5E5E5; overflow: hidden; position: relative; flex-shrink: 0; scroll-snap-align: start; }
+    .m-card img.photo { width: 100%; height: 100%; object-fit: cover; }
+    .m-card .overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.5) 40%); backdrop-filter: blur(7px); }
+    .m-card .info { display: flex; align-items: center; gap: 6px; }
+    .m-card .flag { height: 12px; border-radius: 2px; }
+    .m-card .name { font-size: 15px; color: white; }
+
+    /* FEATURE */
+    .feature { padding: 40px 16px; text-align: center; }
+    .feature .badge { display: inline-flex; border: 1px solid #D8F2DC; border-radius: 13px; padding: 4px 8px; font-size: 12px; color: #424242; box-shadow: 0 1px 1px #A3F9B0; margin-bottom: 12px; }
+    .feature .title { font-size: 24px; font-weight: 500; margin-bottom: 24px; }
+    .feature .title span { font-weight: 400; }
+    .feature .mockup-img { width: 100%; max-width: 320px; border-radius: 12px; margin-bottom: 24px; }
+    .news-pills { text-align: left; }
+    .m-news-pill { background: linear-gradient(90deg, white, rgba(255,255,255,0.8)); border: 1px solid #0E36A5; border-radius: 100px; padding: 10px 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+    .m-news-pill img { width: 36px; height: 20px; object-fit: cover; border-radius: 3px; flex-shrink: 0; }
+    .m-news-pill .text { font-size: 12px; color: #2E364D; line-height: 1.3; }
+    .m-news-pill .meta { font-size: 10px; color: #78788C; margin-top: 2px; }
+    .f-tabs-mobile { margin-top: 24px; }
+    .fm-tab { padding: 16px 0; border-bottom: 1.5px solid #EAEAEA; cursor: pointer; text-align: left; }
+    .fm-tab.active { border-color: #0E36A5; }
+    .fm-tab .label { font-size: 14px; font-weight: 500; color: #2E364D; }
+    .fm-tab.active .label { color: #0E36A5; }
+
+    /* WHY */
+    .why { padding: 48px 16px; position: relative; overflow: hidden; }
+    .why .globe-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.05; pointer-events: none; }
+    .why .globe-bg img { width: 200%; max-width: none; }
+    .why-content { position: relative; z-index: 1; }
+    .why .section-label { font-size: 12px; color: #424242; text-align: center; margin-bottom: 8px; letter-spacing: 0.5px; }
+    .why h2 { font-size: 28px; font-weight: 500; text-align: center; margin-bottom: 32px; }
+    .why h2 span { font-weight: 400; }
+    .why-card { padding: 32px 20px; background: rgba(249,249,249,0.9); border: 1px solid #E5E5E5; margin-bottom: -1px; display: flex; flex-direction: column; gap: 12px; }
+    .why-card .icon { width: 24px; height: 24px; background: #0E36A5; border-radius: 4px; }
+    .why-card .card-title { font-size: 16px; font-weight: 500; }
+    .why-card .card-desc { font-size: 16px; color: #78788C; }
+
+    /* FAQ */
+    .faq { padding: 48px 16px; }
+    .faq h2 { font-size: 28px; font-weight: 400; margin-bottom: 24px; }
+    .faq-item { border-bottom: 1px solid #E5E5E5; }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; cursor: pointer; gap: 12px; }
+    .faq-q .q-text { font-size: 14px; font-weight: 500; flex: 1; }
+    .faq-q .toggle { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; flex-shrink: 0; }
+    .faq-q .toggle svg { width: 14px; height: 14px; stroke: #030B21; }
+    .faq-a { font-size: 14px; color: #78788C; line-height: 1.4; padding-bottom: 16px; display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .toggle { transform: rotate(45deg); }
+
+    /* FOOTER */
+    .footer { background: #0E36A5; color: white; padding: 32px 16px 24px; }
+    .footer .logo { height: 20px; margin-bottom: 24px; filter: brightness(0) invert(1); }
+    .footer-cols { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 24px; }
+    .footer-col h4 { font-size: 12px; font-weight: 500; margin-bottom: 8px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px; }
+    .footer-col a { display: block; font-size: 13px; color: white; text-decoration: none; margin-bottom: 6px; opacity: 0.85; }
+    .footer-bottom { padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.15); font-size: 12px; opacity: 0.6; text-align: center; }
+  </style>
+</head>
+<body>
+  <a href="/index.html" class="back">&larr; Back</a>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <img src="/assets/polystate-logo.svg" alt="Polystate" class="logo">
+    <a href="#" class="join">Join now</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="globe-bg"><img src="/assets/icons/graticule-world.svg" alt=""></div>
+    <h1>Build a life that<br>moves with you</h1>
+    <p class="sub">From global residencies to banking setup, we make borderless living effortless.</p>
+    <a href="#" class="cta">Become a Global Citizen</a>
+  </section>
+
+  <!-- RESIDENCY -->
+  <section class="residency">
+    <div class="tabs-row">
+      <button class="tab-btn active">Residency Program</button>
+      <button class="tab-btn">Banking Solutions</button>
+      <button class="tab-btn">Company Incorporation</button>
+    </div>
+    <h2 class="res-heading">Get your residency with ease</h2>
+    <div class="benefit-tags">
+      <span class="benefit-tag"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="#0E36A5" stroke-width="1"/><path d="M7 4v3h2.5" stroke="#0E36A5" stroke-width="1" stroke-linecap="round"/></svg> 0% tax on foreign income</span>
+      <span class="benefit-tag"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2L3 5v5h8V5L7 2z" stroke="#0E36A5" stroke-width="1"/></svg> Low presence needed</span>
+      <span class="benefit-tag"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="#0E36A5" stroke-width="1"/><path d="M5 7l1.5 1.5 3-3" stroke="#0E36A5" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg> Quick time to citizenship</span>
+    </div>
+    <div class="cards-scroll">
+      <div class="m-card"><img class="photo" src="/assets/photos/paraguay.png" alt="Paraguay"><div class="overlay"><div class="info"><img class="flag" src="/assets/flags/py.png" alt=""><span class="name">Paraguay</span></div></div></div>
+      <div class="m-card"><img class="photo" src="/assets/photos/uruguay.png" alt="Uruguay"><div class="overlay"><div class="info"><img class="flag" src="/assets/flags/uy.png" alt=""><span class="name">Uruguay</span></div></div></div>
+      <div class="m-card"><img class="photo" src="/assets/photos/panama.png" alt="Panama"><div class="overlay"><div class="info"><img class="flag" src="/assets/flags/pa.png" alt=""><span class="name">Panama</span></div></div></div>
+      <div class="m-card"><img class="photo" src="/assets/photos/mexico.png" alt="Mexico"><div class="overlay"><div class="info"><img class="flag" src="/assets/flags/mx.png" alt=""><span class="name">Mexico</span></div></div></div>
+      <div class="m-card"><img class="photo" src="/assets/photos/brazil.png" alt="Brazil"><div class="overlay"><div class="info"><img class="flag" src="/assets/flags/br.png" alt=""><span class="name">Brazil</span></div></div></div>
+      <div class="m-card"><img class="photo" src="/assets/photos/argentina.png" alt="Argentina"><div class="overlay"><div class="info"><img class="flag" src="/assets/flags/ar.png" alt=""><span class="name">Argentina</span></div></div></div>
+      <div class="m-card"><img class="photo" src="/assets/photos/colombia.png" alt="Colombia"><div class="overlay"><div class="info"><img class="flag" src="/assets/flags/ar.png" alt=""><span class="name">Colombia</span></div></div></div>
+      <div class="m-card"><img class="photo" src="/assets/photos/chile.png" alt="Chile"><div class="overlay"><div class="info"><img class="flag" src="/assets/flags/ar.png" alt=""><span class="name">Chile</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- FEATURE -->
+  <section class="feature">
+    <div class="badge">POWERFUL TOOLS INSIDE</div>
+    <div class="title">A live feed for<br><span>Global citizenship</span></div>
+    <div class="news-pills">
+      <div class="m-news-pill">
+        <img src="/assets/news/st-vincent.png" alt="">
+        <div><div class="text">St. Vincent Launching Citizenship by Investment</div><div class="meta">Today</div></div>
+      </div>
+      <div class="m-news-pill">
+        <img src="/assets/news/singapore.png" alt="">
+        <div><div class="text">Banking in Singapore: In-Person Meeting Required?</div><div class="meta">Yesterday</div></div>
+      </div>
+      <div class="m-news-pill">
+        <img src="/assets/news/golden-visa.png" alt="">
+        <div><div class="text">Easiest Golden Visa in Europe Right Now</div><div class="meta">5 days ago</div></div>
+      </div>
+    </div>
+    <div class="f-tabs-mobile">
+      <div class="fm-tab active"><div class="label">News</div></div>
+      <div class="fm-tab"><div class="label">Citizenship</div></div>
+      <div class="fm-tab"><div class="label">Residency</div></div>
+      <div class="fm-tab"><div class="label">Legal</div></div>
+      <div class="fm-tab"><div class="label">Toolkit</div></div>
+      <div class="fm-tab"><div class="label">Norma AI</div></div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why">
+    <div class="globe-bg"><img src="/assets/icons/graticule-world.svg" alt=""></div>
+    <div class="why-content">
+      <div class="section-label">WHY POLYSTATE</div>
+      <h2>Built for<br><span>Network States</span></h2>
+      <div class="why-card"><div class="icon"></div><div class="card-title">Increase your freedom</div><div class="card-desc">with more choices, optionality, and opportunities across borders</div></div>
+      <div class="why-card"><div class="icon"></div><div class="card-title">Protect yourself</div><div class="card-desc">by reducing your threats, shield wealth and personal data</div></div>
+      <div class="why-card"><div class="icon"></div><div class="card-title">Combine multiple benefits</div><div class="card-desc">from different countries and jurisdictions into your lifestyle</div></div>
+      <div class="why-card"><div class="icon"></div><div class="card-title">Structure your taxes</div><div class="card-desc">in fully compliant, efficient, and location-suited methods</div></div>
+      <div class="why-card"><div class="icon"></div><div class="card-title">Diversify your assets</div><div class="card-desc">across multiple jurisdictions to strengthen financial resilience</div></div>
+      <div class="why-card"><div class="icon"></div><div class="card-title">Evolve with new sovereign city tools</div><div class="card-desc">staying aligned with the changing landscape of global citizenship</div></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <h2>Frequently Asked<br>Questions</h2>
+    <div class="faq-item open">
+      <div class="faq-q"><span class="q-text">Do you manage the entire application process for residencies or visas?</span><span class="toggle"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">Yes, we offer end-to-end support for your residency or visa application.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">Do you handle both personal relocation and business setup?</span><span class="toggle"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">Absolutely. We assist with personal residency, company incorporation, and banking solutions.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">How does your approach differ from traditional immigration agencies?</span><span class="toggle"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">We combine technology with expert knowledge for a more transparent and efficient experience.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">What's included in your service plans or packages?</span><span class="toggle"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">Our plans include consultation, document preparation, application management, and ongoing support.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">Do you manage the entire application process for residencies or visas?</span><span class="toggle"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">We handle every step from initial consultation to final approval.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">Do you handle both personal relocation and business setup?</span><span class="toggle"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">Yes — both personal moves and business establishment are covered.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">How does your approach differ from traditional immigration agencies?</span><span class="toggle"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">Our platform combines real-time data, AI tools, and expert guidance for faster, more affordable results.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <img src="/assets/polystate-logo.svg" alt="Polystate" class="logo">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Disclaimer</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">X</a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Polystate.io. All rights reserved.</div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+    document.querySelectorAll('.fm-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.fm-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

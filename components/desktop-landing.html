@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polystate Desktop Landing</title>
+  <style>
+    @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Regular.woff2') format('woff2'); font-weight: 400; }
+    @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Medium.woff2') format('woff2'); font-weight: 500; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'General Sans', sans-serif; background: #F9F9F9; color: #030B21; line-height: 1.4; }
+    .back { position: fixed; top: 16px; left: 16px; z-index: 1000; font-size: 13px; color: #0E36A5; text-decoration: none; background: rgba(255,255,255,0.9); padding: 6px 12px; border-radius: 8px; border: 1px solid #E5E5E5; backdrop-filter: blur(8px); }
+    .back:hover { text-decoration: underline; }
+
+    /* NAV */
+    .nav { position: fixed; top: 24px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; align-items: center; gap: 32px; padding: 12px 24px; background: rgba(255,255,255,0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.8); border-radius: 100px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .nav img.logo { height: 24px; }
+    .nav a { font-size: 14px; color: #030B21; text-decoration: none; }
+    .nav a:hover { color: #0E36A5; }
+    .nav .join { background: #0E36A5; color: white; padding: 8px 20px; border-radius: 20px; font-size: 14px; text-decoration: none; }
+
+    /* HERO */
+    .hero { height: 769px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; background: #F9F9F9; }
+    .hero .globe-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.08; }
+    .hero .globe-bg img { width: 120%; max-width: none; }
+    .hero h1 { font-size: 48px; font-weight: 400; position: relative; z-index: 1; max-width: 600px; line-height: 1.15; }
+    .hero .sub { font-size: 20px; color: #78788C; margin-top: 16px; position: relative; z-index: 1; max-width: 500px; }
+    .hero .cta { display: inline-block; margin-top: 32px; background: #0E36A5; color: white; font-family: 'General Sans', sans-serif; font-size: 14px; padding: 16px 48px; border-radius: 24px; text-decoration: none; position: relative; z-index: 1; }
+    .hero .cta:hover { background: #0E41CE; }
+
+    /* RESIDENCY */
+    .residency { max-width: 1296px; margin: 0 auto; padding: 64px 32px; }
+    .tabs-row { display: flex; gap: 0; margin-bottom: 24px; }
+    .tab-btn { font-family: 'General Sans', sans-serif; font-size: 16px; font-weight: 500; color: #78788C; background: none; border: none; padding: 12px 24px; border-bottom: 2px solid transparent; cursor: pointer; }
+    .tab-btn.active { color: #0E36A5; border-bottom-color: #0E36A5; }
+    .res-heading { font-size: 32px; font-weight: 500; margin-bottom: 12px; }
+    .benefit-tags { display: flex; gap: 16px; margin-bottom: 24px; }
+    .benefit-tag { display: flex; align-items: center; gap: 6px; font-size: 14px; color: #2E364D; }
+    .benefit-tag svg { width: 16px; height: 16px; }
+    .cards-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 16px; scroll-snap-type: x mandatory; }
+    .cards-scroll::-webkit-scrollbar { height: 4px; }
+    .cards-scroll::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 2px; }
+    .country-card { width: 275px; height: 327px; border-radius: 4px; border: 1px solid #E5E5E5; overflow: hidden; position: relative; flex-shrink: 0; scroll-snap-align: start; cursor: pointer; }
+    .country-card img.photo { width: 100%; height: 100%; object-fit: cover; }
+    .country-card .overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.5) 40%); backdrop-filter: blur(7.5px); border: 1px solid rgba(255,255,255,0.7); border-radius: 4px 4px 0 0; transition: all 0.3s; }
+    .country-card .info { display: flex; align-items: center; justify-content: space-between; }
+    .country-card .country-name { display: flex; align-items: center; gap: 8px; }
+    .country-card .flag { height: 16px; border-radius: 2px; }
+    .country-card .name { font-size: 18px; color: white; }
+    .country-card .add { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; background: none; cursor: pointer; }
+    .country-card .add svg { stroke: white; width: 14px; height: 14px; }
+
+    /* FEATURE */
+    .feature { background: #F9F9F9; padding: 64px 0; }
+    .feature-inner { max-width: 1296px; margin: 0 auto; padding: 0 32px; }
+    .feature .badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #D8F2DC; border-radius: 13px; padding: 4px 8px; font-size: 14px; color: #424242; box-shadow: 0 1px 1px #A3F9B0; }
+    .feature .header { text-align: center; margin-bottom: 48px; }
+    .feature .title { font-size: 32px; font-weight: 500; margin-top: 16px; }
+    .feature .title span { font-weight: 400; }
+    .feature-content { display: flex; gap: 48px; }
+    .feature-tabs { width: 451px; flex-shrink: 0; }
+    .f-tab { padding: 24px 0; border-bottom: 1.5px solid #EAEAEA; cursor: pointer; border-radius: 8px 8px 0 0; }
+    .f-tab.active { border-color: #0E36A5; }
+    .f-tab .label { font-size: 16px; font-weight: 500; color: #2E364D; }
+    .f-tab.active .label { color: #0E36A5; }
+    .f-tab .desc { font-size: 16px; color: #2E364D; margin-top: 16px; line-height: 1.4; max-height: 0; overflow: hidden; transition: max-height 0.3s; }
+    .f-tab.active .desc { max-height: 80px; }
+    .feature-panel { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 400px; }
+    .news-pill { background: linear-gradient(90deg, white, rgba(255,255,255,0.8)); border: 1px solid #0E36A5; border-bottom-width: 1px; border-radius: 100px; padding: 12px 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); display: flex; gap: 16px; align-items: flex-start; margin-bottom: 12px; max-width: 380px; }
+    .news-pill img { width: 45px; height: 24px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
+    .news-pill .text { font-size: 13px; color: #2E364D; line-height: 1.35; }
+    .news-pill .meta { font-size: 11px; color: #78788C; margin-top: 2px; }
+
+    /* WHY */
+    .why { padding: 80px 0; position: relative; overflow: hidden; }
+    .why .globe-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.06; pointer-events: none; }
+    .why .globe-bg img { width: 100%; max-width: 1200px; }
+    .why-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+    .why .section-label { font-size: 14px; color: #424242; text-align: center; margin-bottom: 8px; letter-spacing: 0.5px; }
+    .why h2 { font-size: 40px; font-weight: 500; text-align: center; margin-bottom: 48px; }
+    .why h2 span { font-weight: 400; }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid #E5E5E5; }
+    .why-card { padding: 48px 28px; display: flex; flex-direction: column; gap: 16px; justify-content: center; background: rgba(249,249,249,0.9); border-right: 1px solid #E5E5E5; border-bottom: 1px solid #E5E5E5; }
+    .why-card:nth-child(3n) { border-right: none; }
+    .why-card:nth-child(n+4) { border-bottom: none; }
+    .why-card .icon { width: 28px; height: 28px; background: #0E36A5; border-radius: 4px; }
+    .why-card .card-title { font-size: 18px; font-weight: 500; }
+    .why-card .card-desc { font-size: 18px; color: #78788C; }
+    .why-cards-data { }
+
+    /* FAQ */
+    .faq { max-width: 900px; margin: 0 auto; padding: 80px 32px; }
+    .faq h2 { font-size: 40px; font-weight: 400; margin-bottom: 40px; }
+    .faq-item { border-bottom: 1px solid #E5E5E5; }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; cursor: pointer; gap: 16px; }
+    .faq-q .q-text { font-size: 16px; font-weight: 500; flex: 1; }
+    .faq-q .toggle { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; flex-shrink: 0; }
+    .faq-q .toggle svg { width: 16px; height: 16px; stroke: #030B21; }
+    .faq-a { font-size: 16px; color: #78788C; line-height: 1.4; padding-bottom: 24px; display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .toggle { transform: rotate(45deg); }
+
+    /* FOOTER */
+    .footer { background: #0E36A5; color: white; padding: 48px 32px 32px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
+    .footer .logo { height: 28px; margin-bottom: 24px; filter: brightness(0) invert(1); }
+    .footer-cols { display: flex; gap: 64px; }
+    .footer-col h4 { font-size: 13px; font-weight: 500; margin-bottom: 12px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px; }
+    .footer-col a { display: block; font-size: 14px; color: white; text-decoration: none; margin-bottom: 8px; opacity: 0.85; }
+    .footer-col a:hover { opacity: 1; }
+    .footer-bottom { max-width: 1200px; margin: 32px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15); font-size: 13px; opacity: 0.6; text-align: center; }
+  </style>
+</head>
+<body>
+  <a href="/index.html" class="back">&larr; Back</a>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <img src="/assets/polystate-logo.svg" alt="Polystate" class="logo">
+    <a href="#">About</a>
+    <a href="#">Blog</a>
+    <a href="#" class="join">Join now</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="globe-bg"><img src="/assets/icons/graticule-world.svg" alt=""></div>
+    <h1>Build a life that moves with you</h1>
+    <p class="sub">From global residencies to banking setup and beyond, we make borderless living effortless.</p>
+    <a href="#" class="cta">Become a Global Citizen</a>
+  </section>
+
+  <!-- RESIDENCY -->
+  <section class="residency">
+    <div class="tabs-row">
+      <button class="tab-btn active">Residency Program</button>
+      <button class="tab-btn">Company Incorporation</button>
+      <button class="tab-btn">Banking Solutions</button>
+    </div>
+    <h2 class="res-heading">Get your residency with ease</h2>
+    <div class="benefit-tags">
+      <span class="benefit-tag"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#0E36A5" stroke-width="1.2"/><path d="M8 4v4h3" stroke="#0E36A5" stroke-width="1.2" stroke-linecap="round"/></svg> 0% tax on foreign income</span>
+      <span class="benefit-tag"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2L3 6v6h10V6L8 2z" stroke="#0E36A5" stroke-width="1.2"/></svg> Low presence needed</span>
+      <span class="benefit-tag"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#0E36A5" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#0E36A5" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Quick time to citizenship</span>
+    </div>
+    <div class="cards-scroll">
+      <div class="country-card">
+        <img class="photo" src="/assets/photos/paraguay.png" alt="Paraguay">
+        <div class="overlay"><div class="info"><div class="country-name"><img class="flag" src="/assets/flags/py.png" alt=""><span class="name">Paraguay</span></div><button class="add"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></button></div></div>
+      </div>
+      <div class="country-card">
+        <img class="photo" src="/assets/photos/uruguay.png" alt="Uruguay">
+        <div class="overlay"><div class="info"><div class="country-name"><img class="flag" src="/assets/flags/uy.png" alt=""><span class="name">Uruguay</span></div><button class="add"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></button></div></div>
+      </div>
+      <div class="country-card">
+        <img class="photo" src="/assets/photos/panama.png" alt="Panama">
+        <div class="overlay"><div class="info"><div class="country-name"><img class="flag" src="/assets/flags/pa.png" alt=""><span class="name">Panama</span></div><button class="add"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></button></div></div>
+      </div>
+      <div class="country-card">
+        <img class="photo" src="/assets/photos/mexico.png" alt="Mexico">
+        <div class="overlay"><div class="info"><div class="country-name"><img class="flag" src="/assets/flags/mx.png" alt=""><span class="name">Mexico</span></div><button class="add"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></button></div></div>
+      </div>
+      <div class="country-card">
+        <img class="photo" src="/assets/photos/brazil.png" alt="Brazil">
+        <div class="overlay"><div class="info"><div class="country-name"><img class="flag" src="/assets/flags/br.png" alt=""><span class="name">Brazil</span></div><button class="add"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></button></div></div>
+      </div>
+      <div class="country-card">
+        <img class="photo" src="/assets/photos/argentina.png" alt="Argentina">
+        <div class="overlay"><div class="info"><div class="country-name"><img class="flag" src="/assets/flags/ar.png" alt=""><span class="name">Argentina</span></div><button class="add"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></button></div></div>
+      </div>
+      <div class="country-card">
+        <img class="photo" src="/assets/photos/colombia.png" alt="Colombia">
+        <div class="overlay"><div class="info"><div class="country-name"><img class="flag" src="/assets/flags/ar.png" alt=""><span class="name">Colombia</span></div><button class="add"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></button></div></div>
+      </div>
+      <div class="country-card">
+        <img class="photo" src="/assets/photos/chile.png" alt="Chile">
+        <div class="overlay"><div class="info"><div class="country-name"><img class="flag" src="/assets/flags/ar.png" alt=""><span class="name">Chile</span></div><button class="add"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke-width="1.5" stroke-linecap="round"/></svg></button></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE -->
+  <section class="feature">
+    <div class="feature-inner">
+      <div class="header">
+        <div class="badge">POWERFUL TOOLS INSIDE</div>
+        <div class="title">A live feed for <span>Global citizenship</span></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-tabs">
+          <div class="f-tab active"><div class="label">News</div><div class="desc">Receive updates on changes to visa, tax policies and global mobility news</div></div>
+          <div class="f-tab"><div class="label">Citizenship</div><div class="desc">Explore citizenship by investment programs across the globe</div></div>
+          <div class="f-tab"><div class="label">Residency</div><div class="desc">Find the best residency programs matching your lifestyle</div></div>
+          <div class="f-tab"><div class="label">Legal</div><div class="desc">Access legal frameworks, tax treaties, and compliance info</div></div>
+          <div class="f-tab"><div class="label">Toolkit</div><div class="desc">Banking integrations, document management, and financial tools</div></div>
+          <div class="f-tab"><div class="label">Norma AI</div><div class="desc">Your AI-powered assistant for global citizenship questions</div></div>
+        </div>
+        <div class="feature-panel">
+          <div>
+            <div class="news-pill">
+              <img src="/assets/news/st-vincent.png" alt="">
+              <div><div class="text">New Opportunity: St. Vincent Launching Citizenship by Investment</div><div class="meta">Today</div></div>
+            </div>
+            <div class="news-pill">
+              <img src="/assets/news/singapore.png" alt="">
+              <div><div class="text">Banking in Singapore: In-Person Meeting Required or not?</div><div class="meta">Yesterday</div></div>
+            </div>
+            <div class="news-pill">
+              <img src="/assets/news/golden-visa.png" alt="">
+              <div><div class="text">The Easiest (and Cheapest) Golden Visa in Europe Right Now</div><div class="meta">5 days ago</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why">
+    <div class="globe-bg"><img src="/assets/icons/graticule-world.svg" alt=""></div>
+    <div class="why-inner">
+      <div class="section-label">WHY POLYSTATE</div>
+      <h2>Built for <span>Network States</span></h2>
+      <div class="why-grid">
+        <div class="why-card"><div class="icon"></div><div class="card-title">Increase your freedom</div><div class="card-desc">with more choices, optionality, and opportunities across borders</div></div>
+        <div class="why-card"><div class="icon"></div><div class="card-title">Protect yourself</div><div class="card-desc">by reducing your threats, shieldt wealth and personal data</div></div>
+        <div class="why-card"><div class="icon"></div><div class="card-title">Combine multiple benefits</div><div class="card-desc">from different countries and jurisdictions into your lifestyle</div></div>
+        <div class="why-card"><div class="icon"></div><div class="card-title">Structure your taxes</div><div class="card-desc">in fully compliant, efficient, and location-suited way methods</div></div>
+        <div class="why-card"><div class="icon"></div><div class="card-title">Diversify your assets</div><div class="card-desc">across multiple jurisdictions to strengthen your financial resilience</div></div>
+        <div class="why-card"><div class="icon"></div><div class="card-title">Evolve with new sovereign city tools</div><div class="card-desc">staying aligned with the changing landscape of global citizenship</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <h2>Frequently Asked<br>Questions</h2>
+    <div class="faq-item open">
+      <div class="faq-q"><span class="q-text">Do you manage the entire application process for residencies or visas?</span><span class="toggle"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">Yes, we offer end-to-end support for your residency or visa application, from document preparation to final approval.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">Do you handle both personal relocation and business setup?</span><span class="toggle"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">Absolutely. We assist with personal residency, company incorporation, banking solutions, and tax optimization.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">How does your approach differ from traditional immigration agencies?</span><span class="toggle"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">We combine technology with expert knowledge to provide a more transparent, efficient, and personalized experience compared to traditional agencies.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">What's included in your service plans or packages?</span><span class="toggle"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">Our plans include consultation, document preparation, application management, and ongoing support tailored to your specific needs.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">Do you handle both personal relocation and business setup?</span><span class="toggle"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">Yes, we provide comprehensive solutions covering both personal moves and business establishment in your target jurisdiction.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">Do you manage the entire application process for residencies or visas?</span><span class="toggle"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">We handle every step — from initial consultation to document submission and follow-up with authorities.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-text">How does your approach differ from traditional immigration agencies?</span><span class="toggle"><svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke-width="1.5" stroke-linecap="round"/></svg></span></div>
+      <div class="faq-a">Our platform combines real-time data, AI-powered tools, and expert guidance — making the process faster, more transparent, and more affordable.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <img src="/assets/polystate-logo.svg" alt="Polystate" class="logo">
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Terms of Service</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Legal Disclaimer</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">X</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Polystate.io. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('open'));
+    });
+    // Residency tabs (visual only)
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+    // Feature tabs (visual only)
+    document.querySelectorAll('.f-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.f-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
