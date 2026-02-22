@@ -11,6 +11,9 @@
     body { font-family: 'General Sans', sans-serif; background: #EAEAEA; color: #030B21; line-height: 1.4; }
     .container { max-width: 960px; margin: 0 auto; padding: 60px 32px; }
     .logo { height: 48px; margin-bottom: 16px; }
+    .logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .copy-url-btn { background: rgba(14,54,165,0.08); border: 1px solid rgba(14,54,165,0.15); color: #0E36A5; font-family: 'General Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 8px; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
+    .copy-url-btn:hover { background: rgba(14,54,165,0.15); }
     h1 { font-size: 40px; font-weight: 500; margin-bottom: 8px; }
     .subtitle { font-size: 20px; color: #78788C; margin-bottom: 48px; }
     h2 { font-size: 24px; font-weight: 500; margin: 40px 0 16px; padding-top: 32px; border-top: 1px solid #ddd; }
@@ -34,7 +37,10 @@
 </head>
 <body>
   <div class="container">
-    <a href="/assets/polystate-logo.svg" download="polystate-logo.svg" title="Download logo"><img src="/assets/polystate-logo.svg" alt="Polystate" class="logo"></a>
+    <div class="logo-row">
+      <img src="/assets/polystate-logo.svg" alt="Polystate" class="logo">
+      <button class="copy-url-btn" onclick="navigator.clipboard.writeText(location.origin+'/assets/polystate-logo.svg').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy logo URL',1500)})">Copy logo URL</button>
+    </div>
     <h1>Design System</h1>
     <p class="subtitle">Assets, tokens, and brand kit for Polystate. <a href="/design-system.json" class="json-link">design-system.json</a></p>
 
