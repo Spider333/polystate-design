@@ -56,7 +56,16 @@
     }
   },
   "assets": {
-    "logo": "/assets/polystate-logo.svg",
+    "logos": {
+      "wordmark-dark": "/assets/logos/logo-dark.svg",
+      "wordmark-blue": "/assets/logos/logo-blue.svg",
+      "wordmark-legacy": "/assets/polystate-logo.svg",
+      "icon-light": "/assets/logos/icon-light.png",
+      "icon-dark": "/assets/logos/icon-dark.png",
+      "qr-code": "/assets/logos/qr-code.png",
+      "cover": "/assets/logos/cover.jpeg",
+      "banner": "/assets/logos/banner.png"
+    },
     "globe": "/assets/globe.png",
     "flags": {
       "paraguay": "/assets/flags/py.png",
@@ -77,16 +86,15 @@
       "panama": "/assets/photos/panama.png",
       "mexico": "/assets/photos/mexico.png",
       "portugal": "/assets/photos/portugal.png",
-      "argentina": "/assets/photos/argentina.png"
+      "argentina": "/assets/photos/argentina.png",
+      "brazil": "/assets/photos/brazil.png",
+      "chile": "/assets/photos/chile.png",
+      "colombia": "/assets/photos/colombia.png"
     },
-    "partners": {
-      "offshore-citizen": "/assets/partners/offshore-citizen.png",
-      "wealthy-expat": "/assets/partners/wealthy-expat.png"
-    },
-    "icons": {
-      "frame": "/assets/icons/frame.svg",
-      "group": "/assets/icons/group.svg",
-      "world-vector": "/assets/icons/world-vector.svg"
+    "news": {
+      "st-vincent": "/assets/news/st-vincent.png",
+      "singapore": "/assets/news/singapore.png",
+      "golden-visa": "/assets/news/golden-visa.png"
     },
     "screenshots": {
       "desktop-landing": "/assets/screenshots/desktop-landing.png",

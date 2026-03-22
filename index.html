@@ -3,114 +3,1107 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Polystate Design System</title>
+  <title>Polystate — Brand &amp; Design System</title>
   <style>
     @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Regular.woff2') format('woff2'); font-weight: 400; }
     @font-face { font-family: 'General Sans'; src: url('/assets/GeneralSans-Medium.woff2') format('woff2'); font-weight: 500; }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'General Sans', sans-serif; background: #EAEAEA; color: #030B21; line-height: 1.4; }
-    .container { max-width: 960px; margin: 0 auto; padding: 60px 32px; }
-    .logo { height: 48px; margin-bottom: 16px; }
-    .logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-    .copy-url-btn { background: rgba(14,54,165,0.08); border: 1px solid rgba(14,54,165,0.15); color: #0E36A5; font-family: 'General Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 8px; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
-    .copy-url-btn:hover { background: rgba(14,54,165,0.15); }
-    h1 { font-size: 40px; font-weight: 500; margin-bottom: 8px; }
-    .subtitle { font-size: 20px; color: #78788C; margin-bottom: 48px; }
-    h2 { font-size: 24px; font-weight: 500; margin: 40px 0 16px; padding-top: 32px; border-top: 1px solid #ddd; }
-    .colors { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
-    .swatch { width: 120px; }
-    .swatch-box { width: 120px; height: 64px; border-radius: 8px; margin-bottom: 6px; border: 1px solid rgba(0,0,0,0.08); }
-    .swatch-label { font-size: 13px; color: #78788C; }
-    .swatch-hex { font-size: 14px; font-weight: 500; }
-    .type-row { margin-bottom: 12px; }
-    .type-label { font-size: 13px; color: #78788C; margin-bottom: 2px; }
-    .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
-    .asset-card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #E5E5E5; }
-    .asset-card img { width: 100%; height: 140px; object-fit: cover; }
-    .asset-card .info { padding: 12px; }
-    .asset-card .info a { font-size: 13px; color: #0E36A5; text-decoration: none; word-break: break-all; }
-    .asset-card .info .name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
-    .btn { display: inline-block; background: #0E36A5; color: white; font-size: 14px; font-family: 'General Sans', sans-serif; font-weight: 400; padding: 16px 48px; border-radius: 24px; text-decoration: none; margin-top: 8px; }
-    code { background: rgba(14,54,165,0.08); padding: 2px 6px; border-radius: 4px; font-size: 14px; }
-    .json-link { display: inline-block; margin-top: 8px; font-size: 14px; color: #0E36A5; }
+
+    body {
+      font-family: 'General Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #ffffff;
+      color: #000000;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      padding: 24px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    nav .logo { height: 36px; }
+    nav .nav-links { display: flex; gap: 32px; align-items: center; }
+    nav .nav-links a {
+      font-size: 15px;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: opacity 0.15s;
+    }
+    nav .nav-links a:hover { opacity: 0.5; }
+
+    /* ---- HERO ---- */
+    .hero {
+      padding: 80px 0 64px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: clamp(16px, 2vw, 20px);
+      color: #808080;
+      max-width: 640px;
+      line-height: 1.6;
+    }
+
+    /* ---- SECTION ---- */
+    .section {
+      padding: 64px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .section:last-child { border-bottom: none; }
+    .section-header {
+      margin-bottom: 48px;
+    }
+    .section-header h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+    .section-header p {
+      font-size: 16px;
+      color: #808080;
+      max-width: 560px;
+    }
+
+    /* ---- LOGO GRID ---- */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 32px;
+    }
+    .logo-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .logo-card:hover { border-color: #b0b0b0; }
+    .logo-preview {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+    .logo-preview.dark { background: #030B21; }
+    .logo-preview.light { background: #f5f5f5; }
+    .logo-preview img { max-height: 80px; max-width: 80%; }
+    .logo-info {
+      padding: 20px 24px;
+      border-top: 1px solid #e5e5e5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-info .name {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .logo-info .downloads { display: flex; gap: 8px; }
+    .dl-btn {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #000;
+      background: #f0f0f0;
+      padding: 6px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.15s;
+      letter-spacing: 0.02em;
+    }
+    .dl-btn:hover { background: #e0e0e0; }
+
+    /* ---- COLORS ---- */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 20px;
+    }
+    .color-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .color-swatch { height: 100px; }
+    .color-meta {
+      padding: 14px 16px;
+      border-top: 1px solid #e5e5e5;
+    }
+    .color-meta .hex {
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .color-meta .label {
+      font-size: 13px;
+      color: #808080;
+      margin-top: 2px;
+    }
+
+    /* ---- TYPOGRAPHY ---- */
+    .type-specimens { display: flex; flex-direction: column; gap: 40px; }
+    .type-specimen { }
+    .type-meta {
+      font-size: 13px;
+      color: #808080;
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .type-sample-h1 { font-size: clamp(36px, 4vw, 56px); font-weight: 400; letter-spacing: -0.02em; }
+    .type-sample-h2 { font-size: clamp(28px, 3vw, 40px); font-weight: 500; letter-spacing: -0.01em; }
+    .type-sample-body { font-size: 20px; font-weight: 400; color: #808080; max-width: 600px; }
+    .type-sample-label { font-size: 14px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+    .type-sample-btn {
+      display: inline-block;
+      background: #0E36A5;
+      color: white;
+      font-family: 'General Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 16px 48px;
+      border-radius: 24px;
+      text-decoration: none;
+    }
+
+    /* ---- ASSET GRID (photos, flags, icons) ---- */
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .asset-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .asset-card:hover { border-color: #b0b0b0; }
+    .asset-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+    }
+    .asset-card .meta {
+      padding: 16px 20px;
+      border-top: 1px solid #e5e5e5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .asset-card .meta .name { font-size: 15px; font-weight: 500; }
+    .asset-card .meta a {
+      font-size: 13px;
+      color: #808080;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .asset-card .meta a:hover { color: #000; }
+
+    /* ---- FLAGS ROW ---- */
+    .flags-row {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .flag-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .flag-item img {
+      height: 40px;
+      border-radius: 4px;
+      border: 1px solid #e5e5e5;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .flag-item span { font-size: 13px; color: #808080; }
+
+    /* ---- COMPONENTS ---- */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .component-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .component-card:hover { border-color: #b0b0b0; }
+    .component-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+    .component-card .meta {
+      padding: 16px 20px;
+      border-top: 1px solid #e5e5e5;
+    }
+    .component-card .meta .name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .component-card .meta a {
+      font-size: 13px;
+      color: #808080;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .component-card .meta a:hover { color: #000; }
+
+    /* ---- PARTNERS ---- */
+    .partner-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .partner-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
+      width: 220px;
+      transition: border-color 0.2s;
+    }
+    .partner-card:hover { border-color: #b0b0b0; }
+    .partner-card img {
+      height: 80px;
+      width: 100%;
+      object-fit: contain;
+      padding: 20px;
+      display: block;
+    }
+    .partner-card .meta {
+      padding: 12px 16px;
+      border-top: 1px solid #e5e5e5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .partner-card .meta .name { font-size: 14px; font-weight: 500; }
+    .partner-card .meta a { font-size: 13px; color: #808080; text-decoration: none; }
+    .partner-card .meta a:hover { color: #000; }
+
+    /* ---- API ---- */
+    .code-block {
+      background: #fafafa;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 24px 28px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: auto;
+      color: #333;
+    }
+
+    /* ---- FOOTER ---- */
+    .footer {
+      padding: 48px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer .copy { font-size: 14px; color: #808080; }
+    .footer .links { display: flex; gap: 24px; }
+    .footer .links a {
+      font-size: 14px;
+      color: #808080;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer .links a:hover { color: #000; }
+
+    /* ---- BUNDLE BAR ---- */
+    .bundle-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fafafa;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 20px 28px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .bundle-bar .info {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .bundle-bar .info span {
+      font-weight: 400;
+      color: #808080;
+      margin-left: 8px;
+      font-size: 14px;
+    }
+    .bundle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      background: #000;
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .bundle-btn:hover { background: #333; }
+
+    /* ---- LICENSING BADGE ---- */
+    .license-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fafafa;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 14px;
+      color: #808080;
+      margin-top: 24px;
+    }
+    .license-badge strong { color: #000; font-weight: 500; }
+
+    /* ---- COPYABLE ---- */
+    .copyable {
+      cursor: pointer;
+      position: relative;
+    }
+    .copyable:hover { opacity: 0.7; }
+    .copy-toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #000;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ---- COUNTRY DATA CARDS ---- */
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .country-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .country-card:hover { border-color: #b0b0b0; }
+    .country-card .photo {
+      height: 160px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .country-card .photo .flag-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      height: 24px;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .country-card .details {
+      padding: 20px;
+      border-top: 1px solid #e5e5e5;
+    }
+    .country-card .details .country-name {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .country-card .details ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .country-card .details li {
+      font-size: 14px;
+      color: #808080;
+      padding-left: 16px;
+      position: relative;
+    }
+    .country-card .details li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #CADDFF;
+    }
+
+    /* ---- BRAND COPY ---- */
+    .copy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+    }
+    .copy-item {
+      border: 1px solid #e5e5e5;
+      border-radius: 10px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.15s;
+    }
+    .copy-item:hover { border-color: #b0b0b0; background: #fafafa; }
+    .copy-item .text {
+      font-size: 15px;
+      font-weight: 400;
+      color: #000;
+      line-height: 1.4;
+    }
+    .copy-item .copy-hint {
+      font-size: 12px;
+      color: #b0b0b0;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ---- GUIDELINES ---- */
+    .guidelines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .guideline-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .guideline-card h4 {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .guideline-card .do { color: #1a8a3f; }
+    .guideline-card .dont { color: #d43b2e; }
+    .guideline-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .guideline-card li {
+      font-size: 14px;
+      color: #555;
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .guideline-card .do-list li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: #1a8a3f;
+      font-weight: 500;
+    }
+    .guideline-card .dont-list li::before {
+      content: '\2717';
+      position: absolute;
+      left: 0;
+      color: #d43b2e;
+      font-weight: 500;
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      nav { padding: 20px; }
+      .hero { padding: 48px 0 40px; }
+      .section { padding: 40px 0; }
+      .logo-grid { grid-template-columns: 1fr; }
+      .logo-info { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .bundle-bar { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/"><img src="/assets/logos/logo-dark.svg" alt="Polystate" class="logo"></a>
+    <div class="nav-links">
+      <a href="https://polystate.io">Website</a>
+      <a href="/design-system.json">API</a>
+      <a href="https://github.com/Spider333/polystate-design">GitHub</a>
+    </div>
+  </nav>
+
   <div class="container">
-    <div class="logo-row">
-      <img src="/assets/polystate-logo.svg" alt="Polystate" class="logo">
-      <button class="copy-url-btn" onclick="navigator.clipboard.writeText(location.origin+'/assets/polystate-logo.svg').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy logo URL',1500)})">Copy logo URL</button>
-    </div>
-    <h1>Design System</h1>
-    <p class="subtitle">Assets, tokens, and brand kit for Polystate. <a href="/design-system.json" class="json-link">design-system.json</a></p>
 
-    <h2>Colors</h2>
-    <div class="colors">
-      <div class="swatch"><div class="swatch-box" style="background:#0E36A5"></div><div class="swatch-hex">#0E36A5</div><div class="swatch-label">Primary Blue</div></div>
-      <div class="swatch"><div class="swatch-box" style="background:#030B21"></div><div class="swatch-hex">#030B21</div><div class="swatch-label">Dark Blue</div></div>
-      <div class="swatch"><div class="swatch-box" style="background:#CADDFF"></div><div class="swatch-hex">#CADDFF</div><div class="swatch-label">Light Blue</div></div>
-      <div class="swatch"><div class="swatch-box" style="background:#D8F2DC"></div><div class="swatch-hex">#D8F2DC</div><div class="swatch-label">Accent Green</div></div>
-      <div class="swatch"><div class="swatch-box" style="background:#EAEAEA"></div><div class="swatch-hex">#EAEAEA</div><div class="swatch-label">Neutral Cream</div></div>
-      <div class="swatch"><div class="swatch-box" style="background:#78788C"></div><div class="swatch-hex">#78788C</div><div class="swatch-label">Neutral Grey</div></div>
-      <div class="swatch"><div class="swatch-box" style="background:#2E364D"></div><div class="swatch-hex">#2E364D</div><div class="swatch-label">Dark Gray</div></div>
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Brand &amp; Design System</h1>
+      <p>Logos, colors, typography, assets, and component library for Polystate. Use these resources when building with or representing the Polystate brand.</p>
+      <div style="display:flex; gap:24px; margin-top:20px">
+        <a href="https://x.com/polyaboroad" style="font-size:14px; color:#808080; text-decoration:none; transition:color 0.15s" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#808080'">X / Twitter</a>
+        <a href="https://t.me/polystateio" style="font-size:14px; color:#808080; text-decoration:none; transition:color 0.15s" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#808080'">Telegram</a>
+        <a href="https://www.linkedin.com/company/polystate" style="font-size:14px; color:#808080; text-decoration:none; transition:color 0.15s" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#808080'">LinkedIn</a>
+      </div>
     </div>
 
-    <h2>Typography</h2>
-    <div class="type-row"><div class="type-label">Header 1 — Regular 400</div><div style="font-size:48px;font-weight:400">Build a life that moves with you</div></div>
-    <div class="type-row"><div class="type-label">Header 2 — Medium 500</div><div style="font-size:40px;font-weight:500">Your sovereignty, engineered.</div></div>
-    <div class="type-row"><div class="type-label">Body — Regular 400, 24px</div><div style="font-size:24px;font-weight:400;color:#78788C">Residency, banking, company setup — everything you need to go borderless.</div></div>
+    <!-- LOGOS -->
+    <div class="section" id="logos">
+      <div class="section-header">
+        <h2>Logos</h2>
+        <p>The Polystate wordmark and icon in multiple variants. Use the dark version on light backgrounds and the light version on dark backgrounds.</p>
+      </div>
 
-    <h2>Button</h2>
-    <a href="#" class="btn">Become a Global Citizen</a>
-    <p style="margin-top:12px;font-size:13px;color:#78788C">14px General Sans Regular, pill-shaped (24px radius), Primary Blue bg</p>
+      <div class="logo-grid">
+        <div class="logo-card">
+          <div class="logo-preview light">
+            <img src="/assets/logos/logo-dark.svg" alt="Polystate Wordmark Dark">
+          </div>
+          <div class="logo-info">
+            <span class="name">Wordmark — Dark</span>
+            <div class="downloads">
+              <a href="/assets/logos/logo-dark.svg" download class="dl-btn">SVG</a>
+              <button class="dl-btn" onclick="copyUrl('/assets/logos/logo-dark.svg')" style="border:none;cursor:pointer">Copy URL</button>
+            </div>
+          </div>
+        </div>
+        <div class="logo-card">
+          <div class="logo-preview light">
+            <img src="/assets/logos/logo-blue.svg" alt="Polystate Wordmark Blue">
+          </div>
+          <div class="logo-info">
+            <span class="name">Wordmark — Blue</span>
+            <div class="downloads">
+              <a href="/assets/logos/logo-blue.svg" download class="dl-btn">SVG</a>
+              <button class="dl-btn" onclick="copyUrl('/assets/logos/logo-blue.svg')" style="border:none;cursor:pointer">Copy URL</button>
+            </div>
+          </div>
+        </div>
+        <div class="logo-card">
+          <div class="logo-preview dark">
+            <img src="/assets/polystate-logo.svg" alt="Polystate Wordmark Light" style="filter:invert(1)">
+          </div>
+          <div class="logo-info">
+            <span class="name">Wordmark — On Dark</span>
+            <div class="downloads">
+              <a href="/assets/polystate-logo.svg" download class="dl-btn">SVG</a>
+              <button class="dl-btn" onclick="copyUrl('/assets/polystate-logo.svg')" style="border:none;cursor:pointer">Copy URL</button>
+            </div>
+          </div>
+        </div>
+        <div class="logo-card">
+          <div class="logo-preview light">
+            <img src="/assets/logos/icon-light.png" alt="Polystate Icon" style="max-height:100px">
+          </div>
+          <div class="logo-info">
+            <span class="name">Icon — Dark on Light</span>
+            <div class="downloads">
+              <a href="/assets/logos/icon-light.png" download class="dl-btn">PNG</a>
+            </div>
+          </div>
+        </div>
+        <div class="logo-card">
+          <div class="logo-preview dark">
+            <img src="/assets/logos/icon-dark.png" alt="Polystate Icon Dark" style="max-height:100px">
+          </div>
+          <div class="logo-info">
+            <span class="name">Icon — Light on Dark</span>
+            <div class="downloads">
+              <a href="/assets/logos/icon-dark.png" download class="dl-btn">PNG</a>
+            </div>
+          </div>
+        </div>
+        <div class="logo-card">
+          <div class="logo-preview light">
+            <img src="/assets/logos/qr-code.png" alt="Polystate QR Code" style="max-height:120px">
+          </div>
+          <div class="logo-info">
+            <span class="name">QR Code</span>
+            <div class="downloads">
+              <a href="/assets/logos/qr-code.png" download class="dl-btn">PNG</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <h2>Country Photos</h2>
-    <div class="assets-grid">
-      <div class="asset-card"><img src="/assets/photos/paraguay.png" alt="Paraguay"><div class="info"><div class="name">Paraguay</div><a href="/assets/photos/paraguay.png">/assets/photos/paraguay.png</a></div></div>
-      <div class="asset-card"><img src="/assets/photos/uruguay.png" alt="Uruguay"><div class="info"><div class="name">Uruguay</div><a href="/assets/photos/uruguay.png">/assets/photos/uruguay.png</a></div></div>
-      <div class="asset-card"><img src="/assets/photos/panama.png" alt="Panama"><div class="info"><div class="name">Panama</div><a href="/assets/photos/panama.png">/assets/photos/panama.png</a></div></div>
-      <div class="asset-card"><img src="/assets/photos/mexico.png" alt="Mexico"><div class="info"><div class="name">Mexico</div><a href="/assets/photos/mexico.png">/assets/photos/mexico.png</a></div></div>
-      <div class="asset-card"><img src="/assets/photos/portugal.png" alt="Portugal"><div class="info"><div class="name">Portugal</div><a href="/assets/photos/portugal.png">/assets/photos/portugal.png</a></div></div>
+      <h3 style="font-size:20px; font-weight:500; margin-top:48px; margin-bottom:16px">Cover &amp; Banner</h3>
+      <div class="logo-grid" style="grid-template-columns:1fr">
+        <div class="logo-card">
+          <div style="padding:0">
+            <img src="/assets/logos/cover.jpeg" alt="Polystate Cover" style="width:100%; height:auto; display:block">
+          </div>
+          <div class="logo-info">
+            <span class="name">Cover Image</span>
+            <div class="downloads">
+              <a href="/assets/logos/cover.jpeg" download class="dl-btn">JPEG</a>
+            </div>
+          </div>
+        </div>
+        <div class="logo-card">
+          <div style="padding:0">
+            <img src="/assets/logos/banner.png" alt="Polystate Banner" style="width:100%; height:auto; display:block">
+          </div>
+          <div class="logo-info">
+            <span class="name">Banner</span>
+            <div class="downloads">
+              <a href="/assets/logos/banner.png" download class="dl-btn">PNG</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="license-badge">
+        <strong>License</strong> All assets are free to use with attribution to polystate.io
+      </div>
     </div>
 
-    <h2>Flags</h2>
-    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:16px">
-      <div style="text-align:center"><img src="/assets/flags/py.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Paraguay</div></div>
-      <div style="text-align:center"><img src="/assets/flags/uy.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Uruguay</div></div>
-      <div style="text-align:center"><img src="/assets/flags/pa.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Panama</div></div>
-      <div style="text-align:center"><img src="/assets/flags/pt.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Portugal</div></div>
-      <div style="text-align:center"><img src="/assets/flags/hn.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Prospera</div></div>
-      <div style="text-align:center"><img src="/assets/flags/mx.png" style="height:32px;border-radius:3px;border:1px solid rgba(0,0,0,0.08)"><div style="font-size:13px;margin-top:4px">Mexico</div></div>
+    <!-- COLORS -->
+    <div class="section" id="colors">
+      <div class="section-header">
+        <h2>Colors</h2>
+        <p>The core color palette. Primary Blue for interactive elements, Dark Blue for text, supporting tones for backgrounds and states.</p>
+      </div>
+
+      <div class="color-grid">
+        <div class="color-card copyable" onclick="copyText('#0E36A5')">
+          <div class="color-swatch" style="background:#0E36A5"></div>
+          <div class="color-meta"><div class="hex">#0E36A5</div><div class="label">Primary Blue — click to copy</div></div>
+        </div>
+        <div class="color-card copyable" onclick="copyText('#030B21')">
+          <div class="color-swatch" style="background:#030B21"></div>
+          <div class="color-meta"><div class="hex">#030B21</div><div class="label">Dark Blue — click to copy</div></div>
+        </div>
+        <div class="color-card copyable" onclick="copyText('#CADDFF')">
+          <div class="color-swatch" style="background:#CADDFF"></div>
+          <div class="color-meta"><div class="hex">#CADDFF</div><div class="label">Light Blue — click to copy</div></div>
+        </div>
+        <div class="color-card copyable" onclick="copyText('#D8F2DC')">
+          <div class="color-swatch" style="background:#D8F2DC"></div>
+          <div class="color-meta"><div class="hex">#D8F2DC</div><div class="label">Accent Green — click to copy</div></div>
+        </div>
+        <div class="color-card copyable" onclick="copyText('#EAEAEA')">
+          <div class="color-swatch" style="background:#EAEAEA"></div>
+          <div class="color-meta"><div class="hex">#EAEAEA</div><div class="label">Neutral Cream — click to copy</div></div>
+        </div>
+        <div class="color-card copyable" onclick="copyText('#78788C')">
+          <div class="color-swatch" style="background:#78788C"></div>
+          <div class="color-meta"><div class="hex">#78788C</div><div class="label">Neutral Grey — click to copy</div></div>
+        </div>
+        <div class="color-card copyable" onclick="copyText('#2E364D')">
+          <div class="color-swatch" style="background:#2E364D"></div>
+          <div class="color-meta"><div class="hex">#2E364D</div><div class="label">Dark Gray — click to copy</div></div>
+        </div>
+      </div>
     </div>
 
-    <h2>Partners</h2>
-    <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
-      <div class="asset-card" style="width:200px"><img src="/assets/partners/offshore-citizen.png" alt="Offshore Citizen" style="height:80px;object-fit:contain;padding:16px;background:white"><div class="info"><div class="name">Offshore Citizen</div><a href="/assets/partners/offshore-citizen.png">/assets/partners/offshore-citizen.png</a></div></div>
-      <div class="asset-card" style="width:200px"><img src="/assets/partners/wealthy-expat.png" alt="Wealthy Expat" style="height:80px;object-fit:contain;padding:16px;background:white"><div class="info"><div class="name">Wealthy Expat</div><a href="/assets/partners/wealthy-expat.png">/assets/partners/wealthy-expat.png</a></div></div>
+    <!-- TYPOGRAPHY -->
+    <div class="section" id="typography">
+      <div class="section-header">
+        <h2>Typography</h2>
+        <p>General Sans in Regular (400) and Medium (500). Never use Bold. Line height 1.4 across all elements.</p>
+      </div>
+
+      <div class="type-specimens">
+        <div class="type-specimen">
+          <div class="type-meta">Display &mdash; Regular 400</div>
+          <div class="type-sample-h1">Build a life that moves with you</div>
+        </div>
+        <div class="type-specimen">
+          <div class="type-meta">Heading &mdash; Medium 500</div>
+          <div class="type-sample-h2">Your sovereignty, engineered.</div>
+        </div>
+        <div class="type-specimen">
+          <div class="type-meta">Body &mdash; Regular 400</div>
+          <div class="type-sample-body">Residency, banking, company setup — everything you need to go borderless.</div>
+        </div>
+        <div class="type-specimen">
+          <div class="type-meta">Label &mdash; Medium 500, Uppercase</div>
+          <div class="type-sample-label">Residency Programs</div>
+        </div>
+        <div class="type-specimen">
+          <div class="type-meta">Button &mdash; Regular 400, 14px, Pill</div>
+          <span class="type-sample-btn">Become a Global Citizen</span>
+        </div>
+      </div>
+
+      <div style="margin-top:32px; display:flex; gap:12px; flex-wrap:wrap">
+        <a href="/assets/GeneralSans-Regular.woff2" download class="dl-btn">Download Regular .woff2</a>
+        <a href="/assets/GeneralSans-Medium.woff2" download class="dl-btn">Download Medium .woff2</a>
+      </div>
     </div>
 
-    <h2>Components</h2>
-    <p style="font-size:15px;color:#78788C;margin-bottom:16px">HTML/CSS implementations from <a href="https://www.figma.com/design/naTjuJu60fAGc1EGQcMXsl/Polystate" style="color:#0E36A5">Figma source file</a></p>
-    <div class="assets-grid">
-      <div class="asset-card"><img src="/assets/screenshots/desktop-landing.png" alt="Desktop Landing"><div class="info"><div class="name">Desktop Landing</div><a href="/components/desktop-landing.html">View component &rarr;</a></div></div>
-      <div class="asset-card"><img src="/assets/screenshots/mobile-landing.png" alt="Mobile Landing"><div class="info"><div class="name">Mobile Landing</div><a href="/components/mobile-landing.html">View component &rarr;</a></div></div>
-      <div class="asset-card"><img src="/assets/screenshots/live-feed-section.png" alt="Feature Section"><div class="info"><div class="name">Feature Section (6 variants)</div><a href="/components/feature-section.html">View component &rarr;</a></div></div>
-      <div class="asset-card"><img src="/assets/screenshots/components.png" alt="Component Library"><div class="info"><div class="name">Component Library</div><a href="/components/library.html">View component &rarr;</a></div></div>
+    <!-- COUNTRIES -->
+    <div class="section" id="countries">
+      <div class="section-header">
+        <h2>Countries</h2>
+        <p>Jurisdictions Polystate serves — photo, flag, and key facts for each. Click a photo to download.</p>
+      </div>
+
+      <div class="country-grid">
+        <div class="country-card">
+          <a href="/assets/photos/paraguay.png" download class="photo" style="background-image:url(/assets/photos/paraguay.png); display:block">
+            <img src="/assets/flags/py.png" alt="PY" class="flag-badge">
+          </a>
+          <div class="details">
+            <div class="country-name">Paraguay</div>
+            <ul><li>0% tax on foreign income</li><li>Low presence requirements</li><li>Fast citizenship path (3 years)</li></ul>
+          </div>
+        </div>
+        <div class="country-card">
+          <a href="/assets/photos/uruguay.png" download class="photo" style="background-image:url(/assets/photos/uruguay.png); display:block">
+            <img src="/assets/flags/uy.png" alt="UY" class="flag-badge">
+          </a>
+          <div class="details">
+            <div class="country-name">Uruguay</div>
+            <ul><li>0% foreign income tax</li><li>Safe &amp; developed country</li><li>Ocean access</li></ul>
+          </div>
+        </div>
+        <div class="country-card">
+          <a href="/assets/photos/panama.png" download class="photo" style="background-image:url(/assets/photos/panama.png); display:block">
+            <img src="/assets/flags/pa.png" alt="PA" class="flag-badge">
+          </a>
+          <div class="details">
+            <div class="country-name">Panama</div>
+            <ul><li>Territorial tax (0% foreign income)</li><li>Corporate setup</li><li>Large expat community, Non-CRS</li></ul>
+          </div>
+        </div>
+        <div class="country-card">
+          <a href="/assets/photos/mexico.png" download class="photo" style="background-image:url(/assets/photos/mexico.png); display:block">
+            <img src="/assets/flags/mx.png" alt="MX" class="flag-badge">
+          </a>
+          <div class="details">
+            <div class="country-name">Mexico</div>
+            <ul><li>Digital nomad hub</li><li>Low cost of living</li><li>Large expat community</li></ul>
+          </div>
+        </div>
+        <div class="country-card">
+          <a href="/assets/photos/portugal.png" download class="photo" style="background-image:url(/assets/photos/portugal.png); display:block">
+            <img src="/assets/flags/pt.png" alt="PT" class="flag-badge">
+          </a>
+          <div class="details">
+            <div class="country-name">Portugal</div>
+            <ul><li>Bitcoin golden visa</li><li>EU passport after 5 years</li><li>Minimal residency needed</li></ul>
+          </div>
+        </div>
+        <div class="country-card">
+          <div class="photo" style="background:#030B21; display:flex; align-items:center; justify-content:center">
+            <img src="/assets/flags/hn.png" alt="HN" style="height:40px; border-radius:4px">
+          </div>
+          <div class="details">
+            <div class="country-name">Prospera (Honduras)</div>
+            <ul><li>$5,000 lump sum tax</li><li>Most free jurisdiction</li><li>Caribbean location</li></ul>
+          </div>
+        </div>
+        <div class="country-card">
+          <a href="/assets/photos/argentina.png" download class="photo" style="background-image:url(/assets/photos/argentina.png); display:block">
+            <img src="/assets/flags/ar.png" alt="AR" class="flag-badge">
+          </a>
+          <div class="details">
+            <div class="country-name">Argentina</div>
+            <ul><li>Low cost of living</li><li>Vibrant culture</li><li>Growing tech scene</li></ul>
+          </div>
+        </div>
+        <div class="country-card">
+          <a href="/assets/photos/brazil.png" download class="photo" style="background-image:url(/assets/photos/brazil.png); display:block">
+            <img src="/assets/flags/br.png" alt="BR" class="flag-badge">
+          </a>
+          <div class="details">
+            <div class="country-name">Brazil</div>
+            <ul><li>Large market</li><li>Diverse geography</li><li>Digital nomad visa</li></ul>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <h2>Other Assets</h2>
-    <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
-      <div style="text-align:center"><img src="/assets/polystate-logo.svg" style="height:40px"><div style="font-size:13px;margin-top:4px"><a href="/assets/polystate-logo.svg" style="color:#0E36A5">polystate-logo.svg</a></div></div>
-      <div style="text-align:center"><img src="/assets/globe.png" style="height:80px;opacity:0.4"><div style="font-size:13px;margin-top:4px"><a href="/assets/globe.png" style="color:#0E36A5">globe.png</a></div></div>
-      <div style="text-align:center"><div style="font-size:13px"><a href="/assets/GeneralSans-Regular.woff2" style="color:#0E36A5">GeneralSans-Regular.woff2</a></div></div>
-      <div style="text-align:center"><div style="font-size:13px"><a href="/assets/GeneralSans-Medium.woff2" style="color:#0E36A5">GeneralSans-Medium.woff2</a></div></div>
+    <!-- FLAGS -->
+    <div class="section" id="flags">
+      <div class="section-header">
+        <h2>Flags</h2>
+        <p>Country flags at 160px width. Use in cards, tables, and jurisdiction selectors.</p>
+      </div>
+
+      <div class="flags-row">
+        <div class="flag-item"><img src="/assets/flags/py.png" alt="Paraguay"><span>Paraguay</span></div>
+        <div class="flag-item"><img src="/assets/flags/uy.png" alt="Uruguay"><span>Uruguay</span></div>
+        <div class="flag-item"><img src="/assets/flags/pa.png" alt="Panama"><span>Panama</span></div>
+        <div class="flag-item"><img src="/assets/flags/pt.png" alt="Portugal"><span>Portugal</span></div>
+        <div class="flag-item"><img src="/assets/flags/hn.png" alt="Prospera"><span>Prospera</span></div>
+        <div class="flag-item"><img src="/assets/flags/mx.png" alt="Mexico"><span>Mexico</span></div>
+        <div class="flag-item"><img src="/assets/flags/ar.png" alt="Argentina"><span>Argentina</span></div>
+        <div class="flag-item"><img src="/assets/flags/br.png" alt="Brazil"><span>Brazil</span></div>
+        <div class="flag-item"><img src="/assets/flags/kh.png" alt="Cambodia"><span>Cambodia</span></div>
+        <div class="flag-item"><img src="/assets/flags/lc.png" alt="St. Lucia"><span>St. Lucia</span></div>
+        <div class="flag-item"><img src="/assets/flags/mt.png" alt="Malta"><span>Malta</span></div>
+      </div>
     </div>
 
-    <h2>API</h2>
-    <p style="font-size:15px;margin-bottom:8px">Fetch design tokens programmatically:</p>
-    <code style="display:block;padding:12px;background:rgba(14,54,165,0.06);border-radius:8px;font-size:14px;line-height:1.6">fetch("https://polystate-design.vercel.app/design-system.json")<br>&nbsp;&nbsp;.then(r => r.json())<br>&nbsp;&nbsp;.then(tokens => console.log(tokens.colors))</code>
+    <!-- QUICK LINKS -->
+    <div class="section" id="links">
+      <div class="section-header">
+        <h2>Polystate Properties</h2>
+        <p>All Polystate web properties in one place.</p>
+      </div>
 
-    <p style="margin-top:60px;font-size:13px;color:#78788C">&copy; Polystate. <a href="https://github.com/Spider333/polystate-design" style="color:#0E36A5">GitHub repo</a> · <a href="/design-system.json" style="color:#0E36A5">design-system.json</a></p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:16px">
+        <a href="https://polystate.io" style="display:block; border:1px solid #e5e5e5; border-radius:12px; padding:24px; text-decoration:none; transition:border-color 0.2s" onmouseover="this.style.borderColor='#b0b0b0'" onmouseout="this.style.borderColor='#e5e5e5'">
+          <div style="font-size:15px; font-weight:500; color:#000; margin-bottom:4px">polystate.io</div>
+          <div style="font-size:13px; color:#808080">Main website</div>
+        </a>
+        <a href="https://quiz.polystate.io" style="display:block; border:1px solid #e5e5e5; border-radius:12px; padding:24px; text-decoration:none; transition:border-color 0.2s" onmouseover="this.style.borderColor='#b0b0b0'" onmouseout="this.style.borderColor='#e5e5e5'">
+          <div style="font-size:15px; font-weight:500; color:#000; margin-bottom:4px">quiz.polystate.io</div>
+          <div style="font-size:13px; color:#808080">Country quiz</div>
+        </a>
+        <a href="https://admin.polystate.io" style="display:block; border:1px solid #e5e5e5; border-radius:12px; padding:24px; text-decoration:none; transition:border-color 0.2s" onmouseover="this.style.borderColor='#b0b0b0'" onmouseout="this.style.borderColor='#e5e5e5'">
+          <div style="font-size:15px; font-weight:500; color:#000; margin-bottom:4px">admin.polystate.io</div>
+          <div style="font-size:13px; color:#808080">Admin portal</div>
+        </a>
+        <a href="https://polystate-blog.vercel.app" style="display:block; border:1px solid #e5e5e5; border-radius:12px; padding:24px; text-decoration:none; transition:border-color 0.2s" onmouseover="this.style.borderColor='#b0b0b0'" onmouseout="this.style.borderColor='#e5e5e5'">
+          <div style="font-size:15px; font-weight:500; color:#000; margin-bottom:4px">Blog</div>
+          <div style="font-size:13px; color:#808080">Network state articles</div>
+        </a>
+        <a href="https://github.com/Spider333/polystate-design" style="display:block; border:1px solid #e5e5e5; border-radius:12px; padding:24px; text-decoration:none; transition:border-color 0.2s" onmouseover="this.style.borderColor='#b0b0b0'" onmouseout="this.style.borderColor='#e5e5e5'">
+          <div style="font-size:15px; font-weight:500; color:#000; margin-bottom:4px">GitHub</div>
+          <div style="font-size:13px; color:#808080">Design system repo</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="section" id="components">
+      <div class="section-header">
+        <h2>Components</h2>
+        <p>Production HTML/CSS implementations from the <a href="https://www.figma.com/design/naTjuJu60fAGc1EGQcMXsl/Polystate" style="color:#000; text-decoration:underline; text-underline-offset:3px">Figma source</a>. Click to view full-page renders.</p>
+      </div>
+
+      <div class="component-grid">
+        <div class="component-card">
+          <img src="/assets/screenshots/desktop-landing.png" alt="Desktop Landing">
+          <div class="meta">
+            <div class="name">Desktop Landing</div>
+            <a href="/components/desktop-landing.html">View &rarr;</a>
+          </div>
+        </div>
+        <div class="component-card">
+          <img src="/assets/screenshots/mobile-landing.png" alt="Mobile Landing">
+          <div class="meta">
+            <div class="name">Mobile Landing</div>
+            <a href="/components/mobile-landing.html">View &rarr;</a>
+          </div>
+        </div>
+        <div class="component-card">
+          <img src="/assets/screenshots/live-feed-section.png" alt="Feature Section">
+          <div class="meta">
+            <div class="name">Feature Section</div>
+            <a href="/components/feature-section.html">View &rarr;</a>
+          </div>
+        </div>
+        <div class="component-card">
+          <img src="/assets/screenshots/components.png" alt="Component Library">
+          <div class="meta">
+            <div class="name">Component Library</div>
+            <a href="/components/library.html">View &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRAND COPY -->
+    <div class="section" id="copy">
+      <div class="section-header">
+        <h2>Brand Copy</h2>
+        <p>Approved headlines, taglines, and value propositions. Click any line to copy.</p>
+      </div>
+
+      <h3 style="font-size:16px; font-weight:500; margin-bottom:12px">Headlines</h3>
+      <div class="copy-grid" style="margin-bottom:32px">
+        <div class="copy-item" onclick="copyText('Build a life that moves with you')">
+          <span class="text">Build a life that moves with you</span>
+          <span class="copy-hint">Click to copy</span>
+        </div>
+        <div class="copy-item" onclick="copyText('Your Global Life, Simplified')">
+          <span class="text">Your Global Life, Simplified</span>
+          <span class="copy-hint">Click to copy</span>
+        </div>
+        <div class="copy-item" onclick="copyText('Your sovereignty, engineered.')">
+          <span class="text">Your sovereignty, engineered.</span>
+          <span class="copy-hint">Click to copy</span>
+        </div>
+        <div class="copy-item" onclick="copyText('Become a Global Citizen')">
+          <span class="text">Become a Global Citizen</span>
+          <span class="copy-hint">Click to copy</span>
+        </div>
+        <div class="copy-item" onclick="copyText('Get your residency with ease')">
+          <span class="text">Get your residency with ease</span>
+          <span class="copy-hint">Click to copy</span>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px; font-weight:500; margin-bottom:12px">Value Propositions</h3>
+      <div class="copy-grid" style="margin-bottom:32px">
+        <div class="copy-item" onclick="copyText('Increase your freedom — More choices, optionality, and opportunities across borders')">
+          <span class="text">Increase your freedom — More choices, optionality, and opportunities across borders</span>
+          <span class="copy-hint">Click to copy</span>
+        </div>
+        <div class="copy-item" onclick="copyText('Protect your assets — Privacy, asset protection, and personal data security across jurisdictions')">
+          <span class="text">Protect your assets — Privacy, asset protection, and personal data security across jurisdictions</span>
+          <span class="copy-hint">Click to copy</span>
+        </div>
+        <div class="copy-item" onclick="copyText('Optimize legally — Tax structuring and multi-jurisdiction benefit stacking while staying compliant')">
+          <span class="text">Optimize legally — Tax structuring and multi-jurisdiction benefit stacking while staying compliant</span>
+          <span class="copy-hint">Click to copy</span>
+        </div>
+      </div>
+
+      <h3 style="font-size:16px; font-weight:500; margin-bottom:12px">Taglines</h3>
+      <div class="copy-grid">
+        <div class="copy-item" onclick="copyText('Residency \u00B7 Banking \u00B7 Company Setup')">
+          <span class="text">Residency &middot; Banking &middot; Company Setup</span>
+          <span class="copy-hint">Click to copy</span>
+        </div>
+        <div class="copy-item" onclick="copyText('0% tax on foreign income \u00B7 Low presence needed \u00B7 Quick time to citizenship')">
+          <span class="text">0% tax on foreign income &middot; Low presence needed &middot; Quick time to citizenship</span>
+          <span class="copy-hint">Click to copy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIDELINES -->
+    <div class="section" id="guidelines">
+      <div class="section-header">
+        <h2>Usage Guidelines</h2>
+        <p>Rules for consistent brand representation across all touchpoints.</p>
+      </div>
+
+      <div class="guidelines-grid">
+        <div class="guideline-card">
+          <h4 class="do">Do</h4>
+          <ul class="do-list">
+            <li>Use General Sans Regular (400) and Medium (500) only</li>
+            <li>Use pill-shaped buttons (24px border-radius) for CTAs</li>
+            <li>Use Primary Blue (#0E36A5) for interactive elements</li>
+            <li>Use Dark Blue (#030B21) for all body text</li>
+            <li>Maintain clear space equal to the icon height around the logo</li>
+            <li>Use country photos from the approved set</li>
+            <li>Keep line height at 1.4 (140%) across all text</li>
+          </ul>
+        </div>
+        <div class="guideline-card">
+          <h4 class="dont">Don't</h4>
+          <ul class="dont-list">
+            <li>Never use Bold weight — only Regular and Medium</li>
+            <li>Don't stretch, rotate, or recolor the logo</li>
+            <li>Don't place the logo on busy backgrounds without a container</li>
+            <li>Don't use gradients on buttons — solid Primary Blue only</li>
+            <li>Don't use colors outside the approved palette</li>
+            <li>Don't use stock photos — only approved country photography</li>
+            <li>Don't mix fonts — General Sans is the only typeface</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- API -->
+    <div class="section" id="api">
+      <div class="section-header">
+        <h2>API</h2>
+        <p>Fetch design tokens programmatically. All assets support CORS and are cached on Vercel CDN.</p>
+      </div>
+
+      <div class="code-block">
+        <span style="color:#808080">// Fetch design tokens</span><br>
+        <span style="color:#0E36A5">const</span> tokens = <span style="color:#0E36A5">await</span> fetch(<span style="color:#b5651d">"https://polystate-design.vercel.app/design-system.json"</span>)<br>
+        &nbsp;&nbsp;.then(r =&gt; r.json())<br><br>
+        <span style="color:#808080">// Use assets directly</span><br>
+        <span style="color:#0E36A5">const</span> logo = <span style="color:#b5651d">"https://polystate-design.vercel.app/assets/logos/logo-dark.svg"</span><br>
+        <span style="color:#0E36A5">const</span> flag = <span style="color:#b5651d">"https://polystate-design.vercel.app/assets/flags/py.png"</span><br>
+        <span style="color:#0E36A5">const</span> photo = <span style="color:#b5651d">"https://polystate-design.vercel.app/assets/photos/paraguay.png"</span>
+      </div>
+
+      <div style="margin-top:16px">
+        <a href="/design-system.json" class="dl-btn">View design-system.json</a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span class="copy">&copy; 2024 Polystate</span>
+      <div class="links">
+        <a href="https://polystate.io">polystate.io</a>
+        <a href="https://github.com/Spider333/polystate-design">GitHub</a>
+        <a href="/design-system.json">design-system.json</a>
+      </div>
+    </div>
+
   </div>
+
+  <div class="copy-toast" id="copyToast">Copied!</div>
+
+  <script>
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('copyToast');
+        toast.textContent = 'Copied: ' + (text.length > 40 ? text.slice(0, 40) + '...' : text);
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 1500);
+      });
+    }
+
+    function copyUrl(url) {
+      const full = location.origin + url;
+      navigator.clipboard.writeText(full).then(() => {
+        const toast = document.getElementById('copyToast');
+        toast.textContent = 'URL copied!';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 1500);
+      });
+    }
+  </script>
 </body>
 </html>
