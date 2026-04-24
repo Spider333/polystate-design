@@ -9,7 +9,7 @@ description: >-
 
 colors:
   primary: "#0E36A5"
-  primary-hover: "#0E41CE"
+  primary-hover: "#0C2E8A"
   bg-dark: "#030B21"
   bg-light: "#F9F9F9"
   bg-white: "#FFFFFF"
@@ -224,7 +224,7 @@ and status — never decorative.
 
 - **Primary (#0E36A5):** The sovereign Polystate blue. CTAs, links,
   active states, brand accent. Exact value — not lighter, not darker.
-- **Primary Hover (#0E41CE):** Slightly brighter for interactive lift.
+- **Primary Hover (#0C2E8A):** Slightly darker for interactive lift.
 - **BG Dark (#030B21):** Near-black navy for immersive sections, fund
   site, hero, app chrome.
 - **BG Light (#F9F9F9):** Warm off-white for open content sections.
