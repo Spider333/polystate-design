@@ -22,7 +22,7 @@ colors:
   text-light: "#EAEAEA"
   text-muted-dark: "#78788C"
   text-muted-light: "#636373"
-  border-light: "#EAEAEA"
+  border-light: "#E5E5E5"
   neutral-dark-grey: "#2E364D"
 
 typography:
